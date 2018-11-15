@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ua.skillsup.examproject.isut.service.ActionService;
 
-@EnableTransactionManagement
 @ImportResource("classpath:/spring/db-context.xml")
 @SpringBootApplication
 public class ExamProjectApplication {

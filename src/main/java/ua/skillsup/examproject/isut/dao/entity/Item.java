@@ -9,7 +9,8 @@ import java.util.Objects;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ItemIdGenerator")
+    @SequenceGenerator(name = "ItemIdGenerator", sequenceName = "item_sequence", allocationSize = 20)
     @Column(name = "id")
     private long id;
     @Column(name = "TITLE", nullable = false)
