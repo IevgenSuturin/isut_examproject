@@ -10,7 +10,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ItemIdGenerator")
-    @SequenceGenerator(name = "ItemIdGenerator", sequenceName = "item_sequence", allocationSize = 20)
+    @SequenceGenerator(name = "ItemIdGenerator", sequenceName = "item_sequence")
     @Column(name = "id")
     private long id;
     @Column(name = "TITLE", nullable = false)
@@ -29,7 +29,7 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(id, item.id);
+        return Objects.equals(id, item.getId());
     }
 
     @Override

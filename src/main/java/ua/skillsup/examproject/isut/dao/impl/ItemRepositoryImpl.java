@@ -8,7 +8,6 @@ import ua.skillsup.examproject.isut.dao.ItemRepository;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -38,7 +37,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
-    public List<Item> findAll() {
+    public Iterable<Item> findAll() {
         return entityManager.createQuery("from Item", Item.class).getResultList();
     }
 

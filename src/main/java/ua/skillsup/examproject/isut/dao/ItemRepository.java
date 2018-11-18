@@ -9,6 +9,6 @@ public interface ItemRepository {
     long create(Item item);
     void update(Item item);
     Item getOne(long id);
-    List<Item> findAll();
+    Iterable<Item> findAll();
     Optional<Item> findByTitle(String title);
 }

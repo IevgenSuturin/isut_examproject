@@ -11,9 +11,9 @@ INSERT INTO ITEM_CATEGORIES (id, item_id, ictype_id, value)
 VALUES ( ic_sequence.nextval, 1, 2, '20 sm');
 
 INSERT INTO OWNER (id, fname, lname, cmpname)
-VALUES ( owner_sequence.nextval, 'FIRST NAME1', 'LAST NAME1', 'COMPANY NAME1' );
+VALUES ( owner_sequence.nextval, 'FIRST OWNER NAME1', 'LAST OWNER NAME1', 'COMPANY OWNER NAME1' );
 INSERT INTO OWNER (id, fname, lname, cmpname)
-VALUES ( owner_sequence.nextval, 'FIRST NAME2', 'LAST NAME2', 'COMPANY NAME2' );
+VALUES ( owner_sequence.nextval, 'FIRST OWNER NAME2', 'LAST OWNER NAME2', 'COMPANY OWNER NAME2' );
 INSERT INTO CONTACT_DATA_TYPES (id, name, desc)
 VALUES ( cdt_sequence.nextval, 'phone', 'phone number' );
 INSERT INTO CONTACT_DATA_TYPES(id, name, desc)

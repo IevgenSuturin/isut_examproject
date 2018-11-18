@@ -15,5 +15,6 @@ public class ExamProjectApplication {
         ActionService service = applicationContext.getBean(ActionService.class);
 
         System.out.println(service.getAllItems());
+        System.out.println(service.getAllOwners());
     }
 }
