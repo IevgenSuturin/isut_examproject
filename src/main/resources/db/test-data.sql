@@ -1,5 +1,8 @@
-INSERT INTO ITEM (id, title, description, count, price, date_stor)
+/*INSERT INTO ITEM (id, title, description, count, price, date_stor)
 VALUES ( item_sequence.nextval, 'test item', 'test item description', 10, 1000, GETDATE() );
+
+INSERT INTO ITEM (id, title, description, count, price, date_stor)
+VALUES ( item_sequence.nextval, 'test item2', 'test item description2', 20, 2000, GETDATE() );
 
 INSERT INTO ITEM_CAT_TYPES (id, name, decs)
 VALUES ( ict_sequence.nextval, 'height', 'height of item' );
@@ -25,9 +28,4 @@ VALUES ( cd_sequence.nextval, 1, 2, 'email1@email.com');
 INSERT INTO CONTACT_DATA (id, owner_id, cdtype_id, value)
 VALUES ( cd_sequence.nextval, 2, 1, '222 222 222 222');
 INSERT INTO CONTACT_DATA (id, owner_id, cdtype_id, value)
-VALUES ( cd_sequence.nextval, 2, 2, 'email22@email.com');
-
-INSERT INTO TRANS_TYPES (id, name, desc)
-VALUES ( trans_type_sequence.nextval, 'store', 'description of store transaction' );
-INSERT INTO TRANS_TYPES (id, name, desc)
-VALUES ( trans_type_sequence.nextval, 'withdrew', 'description of withdrew transaction' );
+VALUES ( cd_sequence.nextval, 2, 2, 'email22@email.com');*/

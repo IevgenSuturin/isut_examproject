@@ -26,4 +26,10 @@ public class OwnerController {
     public long addOwner(@RequestBody Owner owner) {
         return ownerRepository.create(owner);
     }
+
+    @Transactional
+    @DeleteMapping(consumes = {"application/json"})
+    public boolean deleteOwner(@PathVariable long ownerid){
+        return ownerRepository.delete(ownerid);
+    }
 }

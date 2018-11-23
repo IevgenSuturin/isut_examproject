@@ -2,6 +2,8 @@ package ua.skillsup.examproject.isut.dao.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +25,19 @@ public class Item {
     private long price;
     @Column(name = "DATE_STOR")
     private LocalDateTime date_stor;
+
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true )
+    private List<Transaction> transactions = new ArrayList<>();
+
+    public void addTransaction(Transaction transaction){
+        transactions.add(transaction);
+    }
+
+    public void removeTransaction(Transaction transaction){
+        transactions.remove(transaction);
+        transaction.setItem(null);
+    }
 
     @Override
     public boolean equals(Object o) {

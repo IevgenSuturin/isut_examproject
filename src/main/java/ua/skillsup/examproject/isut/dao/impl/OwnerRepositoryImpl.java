@@ -4,9 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
+import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.Optional;
 
 @Repository
@@ -37,6 +39,16 @@ public class OwnerRepositoryImpl implements OwnerRepository {
     @Override
     public Owner getOne(long id) {
         return null;
+    }
+
+    @Override
+    public boolean delete(long ownerId) {
+        Owner owner = entityManager.find(Owner.class, ownerId);
+        if(owner != null) {
+            entityManager.remove(owner);
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package ua.skillsup.examproject.isut.dao.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +22,18 @@ public class Owner {
 
     @Column(name = "CMPNAME")
     private String company_name;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transactions = new ArrayList<>();
+
+    public void addTransaction(Transaction transaction){
+        transactions.add(transaction);
+    }
+
+    public void removeTransaction(Transaction transaction){
+        transactions.remove(transaction);
+        transaction.setOwner(null);
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface ItemRepository {
     long create(Item item);
     void update(Item item);
+    boolean delete(long id);
     Item getOne(long id);
     Iterable<Item> findAll();
     Optional<Item> findByTitle(String title);
