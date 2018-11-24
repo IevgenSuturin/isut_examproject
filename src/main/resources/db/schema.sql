@@ -16,15 +16,15 @@ CREATE TABLE OWNER (id NUMBER(14) NOT NULL,
 );
 CREATE SEQUENCE owner_sequence START WITH 1 INCREMENT BY 50;
 
-CREATE TABLE LOTS(id NUMBER(14) NOT NULL,
-                  item_id NUMBER(14),
-                  owner_id NUMBER(14),
-                  count NUMBER(10),
-                  PRIMARY KEY (id),
-                  CONSTRAINT FK_LOTSOWNER FOREIGN KEY(owner_id) REFERENCES OWNER(id),
-                  CONSTRAINT FK_LOTSITEM FOREIGN KEY(item_id) REFERENCES ITEM(id)
+CREATE TABLE ACCOUNT(id NUMBER(14) NOT NULL,
+                     item_id NUMBER(14),
+                     owner_id NUMBER(14),
+                     count NUMBER(10),
+                     PRIMARY KEY (id),
+                     CONSTRAINT FK_LOTSOWNER FOREIGN KEY(owner_id) REFERENCES OWNER(id),
+                     CONSTRAINT FK_LOTSITEM FOREIGN KEY(item_id) REFERENCES ITEM(id)
 );
-CREATE SEQUENCE lots_sequence START WITH 1 INCREMENT BY 50;
+CREATE SEQUENCE account_sequence START WITH 1 INCREMENT BY 50;
 
 CREATE TABLE TRANS_TYPES ( id NUMBER(14) NOT NULL,
                            name VARCHAR2(20),

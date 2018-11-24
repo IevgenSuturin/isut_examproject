@@ -21,7 +21,7 @@ public class TrTypeRepositoryImpl implements TrTypeRepository {
     }
 
     @Override
-    public long createTrType(TransTypes transTypes) {
+    public long create(TransTypes transTypes) {
         if(transTypes.getId()==0){
             entityManager.persist(transTypes);
         }
@@ -29,12 +29,24 @@ public class TrTypeRepositoryImpl implements TrTypeRepository {
     }
 
     @Override
-    public Iterable<TransTypes> getAll() {
-        return entityManager.createQuery("from TransTypes", TransTypes.class).getResultList();
+    public void update(TransTypes transTypes) {
+        if(transTypes.getId() != 0){
+            entityManager.merge(transTypes);
+        }
     }
 
     @Override
-    public TransTypes getTrTypeById(long id) {
-        return entityManager.find(TransTypes.class, id);
+    public boolean delete(Long aLong) {
+        return false;
+    }
+
+    @Override
+    public TransTypes getOne(Long aLong) {
+        return entityManager.find(TransTypes.class, aLong);
+    }
+
+    @Override
+    public Iterable<TransTypes> findAll() {
+        return entityManager.createQuery("from TransTypes", TransTypes.class).getResultList();
     }
 }

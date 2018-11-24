@@ -5,31 +5,32 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
+import ua.skillsup.examproject.isut.service.ActionService;
 
 @RestController
 @RequestMapping("owners")
 public class OwnerController {
-    private final OwnerRepository ownerRepository;
+    private final ActionService service;
 
     @Autowired
-    public OwnerController(OwnerRepository ownerRepository) {
-        this.ownerRepository = ownerRepository;
+    public OwnerController(ActionService service) {
+        this.service = service;
     }
 
     @GetMapping(produces = {"application/json"})
-    public Iterable<Owner> getAll(){
-        return ownerRepository.findAll();
+    public Iterable<Owner> getAllOwners(){
+        return service.getAllOwners();
     }
 
     @Transactional
     @PostMapping(consumes = {"application/json"})
     public long addOwner(@RequestBody Owner owner) {
-        return ownerRepository.create(owner);
+        return service.createOwner(owner);
     }
 
     @Transactional
     @DeleteMapping(consumes = {"application/json"})
     public boolean deleteOwner(@PathVariable long ownerid){
-        return ownerRepository.delete(ownerid);
+        return service.deleteOwner(ownerid);
     }
 }

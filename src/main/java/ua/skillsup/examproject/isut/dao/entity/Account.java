@@ -4,30 +4,25 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TRANSACTIONS")
-public class Transaction {
-    protected Transaction(){}
+@Table(name = "ACCOUNT")
+public class Account {
+    protected Account(){}
 
-    public Transaction(Item item, TransTypes trtype, int count, Owner owner) {
+    public Account(Item item, Owner owner, int count) {
         this.item = item;
-        this.trtype = trtype;
-        this.count = count;
         this.owner = owner;
+        this.count = count;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TransIdGenerator")
-    @SequenceGenerator(name = "TransIdGenerator", sequenceName = "trans_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AccountIdGenerator")
+    @SequenceGenerator(name = "AccountIdGenerator", sequenceName = "account_sequence")
     @Column(name = "ID")
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trtype_id")
-    private TransTypes trtype;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
@@ -40,32 +35,21 @@ public class Transaction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Transaction that = (Transaction) o;
+        Account that = (Account) o;
         return Objects.equals(id, that.getId());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
+    public int hashCode() { return Objects.hash(id); }
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "Account{" +
                 "id=" + id +
                 ", item=" + item +
-                ", trtype=" + trtype +
-                ", count=" + count +
                 ", owner=" + owner +
+                ", count=" + count +
                 '}';
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public long getId() {
@@ -84,14 +68,6 @@ public class Transaction {
         this.item = item;
     }
 
-    public TransTypes getTrtype() {
-        return trtype;
-    }
-
-    public void setTrtype(TransTypes trtype) {
-        this.trtype = trtype;
-    }
-
     public Owner getOwner() {
         return owner;
     }
@@ -99,5 +75,12 @@ public class Transaction {
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
-}
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+}

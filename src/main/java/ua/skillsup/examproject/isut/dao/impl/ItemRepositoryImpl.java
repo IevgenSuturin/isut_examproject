@@ -21,7 +21,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Transactional
     @Override
-    public boolean delete(long id) {
+    public boolean delete(Long id) {
          Item item = entityManager.find(Item.class, id);
          if(item != null) {
              entityManager.remove(item);
@@ -47,11 +47,13 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public void update(Item item) {
-
+        if(item.getId() != 0){
+            entityManager.merge(item);
+        }
     }
 
     @Override
-    public Item getOne(long id) {
+    public Item getOne(Long id) {
         return null;
     }
 
