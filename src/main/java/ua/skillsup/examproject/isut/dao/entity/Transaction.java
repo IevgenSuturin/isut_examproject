@@ -8,9 +8,8 @@ import java.util.Objects;
 public class Transaction {
     protected Transaction(){}
 
-    public Transaction(Item item, TransTypes trtype, int count, Owner owner) {
+    public Transaction(Item item, int count, Owner owner) {
         this.item = item;
-        this.trtype = trtype;
         this.count = count;
         this.owner = owner;
     }
@@ -24,10 +23,6 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trtype_id")
-    private TransTypes trtype;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
@@ -54,7 +49,6 @@ public class Transaction {
         return "Transaction{" +
                 "id=" + id +
                 ", item=" + item +
-                ", trtype=" + trtype +
                 ", count=" + count +
                 ", owner=" + owner +
                 '}';
@@ -82,14 +76,6 @@ public class Transaction {
 
     public void setItem(Item item) {
         this.item = item;
-    }
-
-    public TransTypes getTrtype() {
-        return trtype;
-    }
-
-    public void setTrtype(TransTypes trtype) {
-        this.trtype = trtype;
     }
 
     public Owner getOwner() {

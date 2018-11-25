@@ -21,7 +21,6 @@ public class ItemController {
     @GetMapping(produces = {"application/json"})
     public Iterable<Item> getAllItems() {return service.getAllItems();}
 
-    @Transactional
     @PostMapping(consumes = {"application/json"})
     public long addItem(@RequestBody Item item) {
         return service.createItem(item);

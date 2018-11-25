@@ -8,9 +8,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "OWNER")
 public class Owner {
+    protected Owner(){}
+
+    public Owner(String first_name, String last_name, String company_name) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.company_name = company_name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OwnerGenerator")
-    @SequenceGenerator(name = "OwnerGenerator", sequenceName = "owner_sequence", initialValue = 0)
+    @SequenceGenerator(name = "OwnerGenerator", sequenceName = "owner_sequence")
     @Column(name = "ID")
     private long id;
 

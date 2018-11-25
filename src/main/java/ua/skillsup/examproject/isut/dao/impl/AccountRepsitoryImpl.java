@@ -2,11 +2,18 @@ package ua.skillsup.examproject.isut.dao.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.skillsup.examproject.isut.dao.AccountRepository;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.entity.Account;
+import ua.skillsup.examproject.isut.dao.entity.Item;
+import ua.skillsup.examproject.isut.dao.entity.Owner;
+
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import java.util.Optional;
 
 @Repository
 public class AccountRepsitoryImpl implements AccountRepository {
@@ -14,6 +21,7 @@ public class AccountRepsitoryImpl implements AccountRepository {
 
     private final EntityManager entityManager;
 
+    @Autowired
     public AccountRepsitoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -49,10 +57,13 @@ public class AccountRepsitoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account getAccountByOwnerAndItem(long ownerId, long itemId) {
-        return  entityManager.createQuery("from Account where item=:itemid and owner=:ownerid", Account.class).
-                setParameter("itemid", itemId ).
-                setParameter("ownerid", ownerId ).
-                getSingleResult();
+    public Account getAccountByOwnerAndItem(Owner owner, Item item) {
+        try{
+            return  entityManager.createQuery("from Account where item=:item and owner=:owner", Account.class).
+                    setParameter("item", item).
+                    setParameter("owner", owner).getSingleResult();
+        }catch (NoResultException ex){
+            return null;
+        }
     }
 }

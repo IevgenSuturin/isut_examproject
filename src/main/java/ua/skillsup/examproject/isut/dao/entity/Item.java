@@ -1,6 +1,7 @@
 package ua.skillsup.examproject.isut.dao.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,16 @@ import java.util.Objects;
 @Entity
 @Table(name = "ITEM")
 public class Item {
+
+    protected Item(){}
+
+    public Item(String title, String description) {
+        this.title = title;
+        this.description = description;
+        this.count = 0;
+        this.price = 0;
+        this.date_stor = LocalDateTime.now().plusYears(1);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ItemIdGenerator")

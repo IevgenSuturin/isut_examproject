@@ -43,6 +43,6 @@ public class TransRepositoryImpl implements TransRepository {
 
     @Override
     public Iterable<Transaction> findAll() {
-        return null;
+        return entityManager.createQuery("from Transaction", Transaction.class).getResultList();
     }
 }

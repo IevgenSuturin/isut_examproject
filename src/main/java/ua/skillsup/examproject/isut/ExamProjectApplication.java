@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
-import ua.skillsup.examproject.isut.dao.entity.TransTypes;
+import ua.skillsup.examproject.isut.dao.entity.Item;
+import ua.skillsup.examproject.isut.dao.entity.Owner;
 import ua.skillsup.examproject.isut.service.ActionService;
 
 @ImportResource("classpath:/spring/db-context.xml")
@@ -18,14 +19,17 @@ public class ExamProjectApplication {
 
         System.out.println(service.getAllItems());
         System.out.println(service.getAllOwners());
-        System.out.println(service.getAllTrTypes());
     }
 
     @Bean
-    public CommandLineRunner initData (ActionService service){
+    public CommandLineRunner initItemData (ActionService service){
         return args -> {
-          service.createTrType(new TransTypes("store", "description of store transaction"));
-          service.createTrType(new TransTypes("withdrew", "description of withdrew transaction"));
+          service.createItem(new Item("TV Samsung", "Samsung"));
+          service.createItem(new Item("TV LG", "LG"));
+
+          service.createOwner(new Owner("John", "Smith", "Gaget International"));
+          service.createOwner(new Owner("Eric", "Smith", "Gaget International"));
         };
     }
+
 }

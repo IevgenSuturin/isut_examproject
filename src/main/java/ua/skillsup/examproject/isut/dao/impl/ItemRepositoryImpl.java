@@ -9,7 +9,6 @@ import ua.skillsup.examproject.isut.dao.ItemRepository;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.Optional;
 
 @Repository
@@ -54,7 +53,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public Item getOne(Long id) {
-        return null;
+        return entityManager.find(Item.class, id);
     }
 
     @Override
