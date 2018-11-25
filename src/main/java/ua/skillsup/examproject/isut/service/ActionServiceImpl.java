@@ -69,7 +69,8 @@ public class ActionServiceImpl implements ActionService {
     @Transactional
     @Override
     public boolean deleteItem(long id) {
-       return itemRepository.delete(id);
+        Item item = itemRepository.getOne(id);
+        return itemRepository.delete(item);
     }
 
     @Transactional
@@ -78,9 +79,17 @@ public class ActionServiceImpl implements ActionService {
       return ownerRepository.create(owner);
     }
 
+    @Transactional
     @Override
     public boolean deleteOwner(long id) {
-       return ownerRepository.delete(id);
+        Owner owner = ownerRepository.getOne(id);
+        if(owner != null && !accountRepository.isActiveOwnerAccountExists(owner))
+        {
+            transRepository.deleteOwnerTransactions(owner);
+            accountRepository.deleteOwnerAccounts(owner);
+            return ownerRepository.delete(owner);
+        }
+       return false;
     }
 
     @Transactional

@@ -44,8 +44,7 @@ public class OwnerRepositoryImpl implements OwnerRepository {
     }
 
     @Override
-    public boolean delete(Long ownerId) {
-        Owner owner = entityManager.find(Owner.class, ownerId);
+    public boolean delete(Owner owner) {
         if(owner != null) {
             entityManager.remove(owner);
             return true;

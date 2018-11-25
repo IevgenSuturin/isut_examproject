@@ -19,10 +19,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     private final EntityManager entityManager;
 
-    @Transactional
     @Override
-    public boolean delete(Long id) {
-         Item item = entityManager.find(Item.class, id);
+    public boolean delete(Item item) {
          if(item != null) {
              entityManager.remove(item);
              return true;

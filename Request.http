@@ -50,6 +50,12 @@ DELETE http://localhost:8080/items/itemid/5
 
 ###
 
+### Send DELETE request with json body
+DELETE http://localhost:8080/owners/ownerid/1
+
+###
+
+
 ### Send POST request with json body
 POST http://localhost:8080/items
 Content-Type: application/json
@@ -69,9 +75,9 @@ POST http://localhost:8080/transaction
 Content-Type: application/json
 
 {
-  "item": {"id": 3},
+  "item": {"id": 1},
   "owner": {"id": 1 },
-  "count": 4
+  "count": -4
 }
 
 ###

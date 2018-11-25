@@ -13,6 +13,8 @@ import ua.skillsup.examproject.isut.dao.entity.Owner;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -42,7 +44,7 @@ public class AccountRepsitoryImpl implements AccountRepository {
     }
 
     @Override
-    public boolean delete(Long aLong) {
+    public boolean delete(Account account) {
         return false;
     }
 
@@ -65,5 +67,24 @@ public class AccountRepsitoryImpl implements AccountRepository {
         }catch (NoResultException ex){
             return null;
         }
+    }
+
+    @Override
+    public boolean isActiveOwnerAccountExists(Owner owner) {
+        List<Account> list = new ArrayList<>();
+        try{
+            list = entityManager.createQuery("from Account a where a.count > :number  and a.owner=:owner", Account.class).
+                    setParameter("number", 0).
+                    setParameter("owner", owner).getResultList();
+        }catch (NoResultException ex) {
+            return false;
+        }
+        return list.size()>0;
+    }
+
+    @Override
+    public void deleteOwnerAccounts(Owner owner) {
+        entityManager.createQuery("DELETE from Account a where a.owner = :owner").
+                setParameter("owner",owner  ).executeUpdate();
     }
 }

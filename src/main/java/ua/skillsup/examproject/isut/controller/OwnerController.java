@@ -1,10 +1,11 @@
 package ua.skillsup.examproject.isut.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
-import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 import ua.skillsup.examproject.isut.service.ActionService;
 
@@ -23,15 +24,18 @@ public class OwnerController {
         return service.getAllOwners();
     }
 
-    @Transactional
     @PostMapping(consumes = {"application/json"})
     public long addOwner(@RequestBody Owner owner) {
         return service.createOwner(owner);
     }
 
-    @Transactional
-    @DeleteMapping(consumes = {"application/json"})
-    public boolean deleteOwner(@PathVariable long ownerid){
-        return service.deleteOwner(ownerid);
+    @RequestMapping(method = RequestMethod.DELETE, value = "ownerid/{ownerid}")
+    public ResponseEntity<String> deleteOwner(@PathVariable long ownerid){
+        if(service.deleteOwner(ownerid)){
+            return new ResponseEntity<String>( "Owner id:"+ownerid+" was deleted", HttpStatus.ACCEPTED);
+
+        }else{
+            return new ResponseEntity<String>( "Owner id:"+ownerid+" was not deleted", HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 }

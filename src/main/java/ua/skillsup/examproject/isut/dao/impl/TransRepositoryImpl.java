@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.TransRepository;
+import ua.skillsup.examproject.isut.dao.entity.Owner;
 import ua.skillsup.examproject.isut.dao.entity.Transaction;
 
 import javax.persistence.EntityManager;
@@ -33,7 +34,7 @@ public class TransRepositoryImpl implements TransRepository {
     public void update(Transaction transaction){}
 
     @Override
-    public boolean delete(Long aLong) {
+    public boolean delete(Transaction transaction) {
         return false;
     }
 
@@ -45,5 +46,11 @@ public class TransRepositoryImpl implements TransRepository {
     @Override
     public Iterable<Transaction> findAll() {
         return entityManager.createQuery("from Transaction", Transaction.class).getResultList();
+    }
+
+    @Override
+    public void deleteOwnerTransactions(Owner owner) {
+        entityManager.createQuery("DELETE from Transaction t where t.owner = :owner").
+                setParameter("owner",owner  ).executeUpdate();
     }
 }
