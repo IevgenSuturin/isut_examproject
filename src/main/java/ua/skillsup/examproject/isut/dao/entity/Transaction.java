@@ -1,6 +1,7 @@
 package ua.skillsup.examproject.isut.dao.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -8,10 +9,11 @@ import java.util.Objects;
 public class Transaction {
     protected Transaction(){}
 
-    public Transaction(Item item, int count, Owner owner) {
+    public Transaction(Item item, Owner owner, int count) {
         this.item = item;
-        this.count = count;
         this.owner = owner;
+        this.count = count;
+        this.date_stor = LocalDateTime.now();
     }
 
     @Id
@@ -30,6 +32,9 @@ public class Transaction {
 
     @Column(name = "count")
     private int count;
+
+    @Column(name = "data_trans")
+    private LocalDateTime date_stor;
 
     @Override
     public boolean equals(Object o) {
@@ -85,5 +90,9 @@ public class Transaction {
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
+
+    public LocalDateTime getDate_stor() { return date_stor;  }
+
+    public void setDate_stor(LocalDateTime date_stor) { this.date_stor = date_stor; }
 }
 

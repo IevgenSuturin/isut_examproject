@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.skillsup.examproject.isut.controller.dto.TransDto;
 import ua.skillsup.examproject.isut.dao.entity.Transaction;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 import ua.skillsup.examproject.isut.service.ActionService;
@@ -19,7 +20,7 @@ public class TransController {
     }
 
     @GetMapping(produces = {"application/json"})
-    public Iterable<Transaction> getAllItems() {return service.getAllTransactions();}
+    public Iterable<TransDto> getAllItems() {return service.getAllTransactions();}
 
 
     @PostMapping(consumes = {"application/json"})

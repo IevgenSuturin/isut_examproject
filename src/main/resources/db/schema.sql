@@ -26,21 +26,13 @@ CREATE TABLE ACCOUNT(id NUMBER(14) NOT NULL,
 );
 CREATE SEQUENCE account_sequence START WITH 1 INCREMENT BY 50;
 
-CREATE TABLE TRANS_TYPES ( id NUMBER(14) NOT NULL,
-                           name VARCHAR2(20),
-                           desc VARCHAR2(40),
-                           PRIMARY KEY (id)
-);
-CREATE SEQUENCE trans_type_sequence START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE TRANSACTIONS ( id NUMBER(14) NOT NULL,
                             item_id NUMBER(14),
                             owner_id NUMBER(14),
                             data_trans DATETIME,
                             count NUMBER(10),
-                            trtype_id NUMBER(14),
                             PRIMARY KEY (id),
-                            CONSTRAINT FK_TRANSTYPE FOREIGN KEY (trtype_id) REFERENCES TRANS_TYPES(id),
                             CONSTRAINT FK_TROWNER FOREIGN KEY (owner_id) REFERENCES OWNER(id),
                             CONSTRAINT FK_TRITEM FOREIGN KEY (item_id) REFERENCES ITEM(id)
 );

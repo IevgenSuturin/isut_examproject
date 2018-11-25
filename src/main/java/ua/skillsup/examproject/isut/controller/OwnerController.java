@@ -3,6 +3,7 @@ package ua.skillsup.examproject.isut.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 import ua.skillsup.examproject.isut.service.ActionService;
@@ -18,7 +19,7 @@ public class OwnerController {
     }
 
     @GetMapping(produces = {"application/json"})
-    public Iterable<Owner> getAllOwners(){
+    public Iterable<OwnerDto> getAllOwners(){
         return service.getAllOwners();
     }
 

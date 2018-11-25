@@ -3,7 +3,9 @@ package ua.skillsup.examproject.isut.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.skillsup.examproject.isut.controller.output.OPItem;
+import ua.skillsup.examproject.isut.controller.dto.ItemDto;
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
+import ua.skillsup.examproject.isut.controller.dto.TransDto;
 import ua.skillsup.examproject.isut.dao.*;
 import ua.skillsup.examproject.isut.dao.entity.*;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
@@ -30,10 +32,10 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public Iterable<OPItem> getAllItems()  {
-        List<OPItem> result = new ArrayList<>();
+    public Iterable<ItemDto> getAllItems()  {
+        List<ItemDto> result = new ArrayList<>();
         for (Item item:itemRepository.findAll()) {
-            result.add(new OPItem(item));
+            result.add(new ItemDto(item));
         }
         return result;
     }
@@ -46,13 +48,23 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public Iterable<Owner> getAllOwners() {
-        return ownerRepository.findAll();
+    public Iterable<OwnerDto> getAllOwners() {
+        List<OwnerDto> result = new ArrayList<>();
+        for (Owner owner: ownerRepository.findAll()) {
+            result.add(new OwnerDto(owner));
+        }
+        return result;
     }
 
     @Transactional
     @Override
-    public Iterable<Transaction> getAllTransactions() { return transRepository.findAll();  }
+    public Iterable<TransDto> getAllTransactions() {
+        List<TransDto> result = new ArrayList<>();
+        for (Transaction trans:transRepository.findAll()) {
+            result.add(new TransDto(trans));
+        }
+        return result;
+    }
 
     @Transactional
     @Override

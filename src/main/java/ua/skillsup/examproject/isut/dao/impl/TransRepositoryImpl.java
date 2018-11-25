@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.TransRepository;
 import ua.skillsup.examproject.isut.dao.entity.Transaction;
-import ua.skillsup.examproject.isut.exceptions.NotImplementedDataAccessMethod;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 
 @Repository
 public class TransRepositoryImpl implements TransRepository {
@@ -23,6 +23,7 @@ public class TransRepositoryImpl implements TransRepository {
     @Override
     public long create(Transaction transaction) {
         if(transaction != null) {
+            transaction.setDate_stor(LocalDateTime.now());
             entityManager.persist(transaction);
         }
         return transaction.getId();
