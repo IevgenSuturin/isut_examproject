@@ -1,5 +1,6 @@
 package ua.skillsup.examproject.isut.service;
 
+import ua.skillsup.examproject.isut.controller.output.OPItem;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 import ua.skillsup.examproject.isut.dao.entity.Transaction;
@@ -11,7 +12,7 @@ public interface ActionService {
      * Retrieve all items from the system
      * @return all known items
      */
-    Iterable<Item> getAllItems();
+    Iterable<OPItem> getAllItems();
     Iterable<Owner> getAllOwners();
     Iterable<Transaction> getAllTransactions();
 

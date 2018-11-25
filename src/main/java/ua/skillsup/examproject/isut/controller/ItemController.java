@@ -3,10 +3,10 @@ package ua.skillsup.examproject.isut.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.service.ActionService;
+import ua.skillsup.examproject.isut.controller.output.OPItem;
 
 @RestController
 @RequestMapping("items")
@@ -19,7 +19,7 @@ public class ItemController {
     }
 
     @GetMapping(produces = {"application/json"})
-    public Iterable<Item> getAllItems() {return service.getAllItems();}
+    public Iterable<OPItem> getAllItems() {return service.getAllItems();}
 
     @PostMapping(consumes = {"application/json"})
     public long addItem(@RequestBody Item item) {

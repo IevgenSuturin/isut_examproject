@@ -3,11 +3,14 @@ package ua.skillsup.examproject.isut.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.skillsup.examproject.isut.controller.output.OPItem;
 import ua.skillsup.examproject.isut.dao.*;
 import ua.skillsup.examproject.isut.dao.entity.*;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 import ua.skillsup.examproject.isut.exceptions.NotImplementedDataAccessMethod;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,8 +30,12 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public Iterable<Item> getAllItems()  {
-        return itemRepository.findAll();
+    public Iterable<OPItem> getAllItems()  {
+        List<OPItem> result = new ArrayList<>();
+        for (Item item:itemRepository.findAll()) {
+            result.add(new OPItem(item));
+        }
+        return result;
     }
 
     @Transactional

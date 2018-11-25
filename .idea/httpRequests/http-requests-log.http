@@ -1,0 +1,582 @@
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-25T024559.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-25T024550.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-25T024230.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-25T023805.500.json
+
+###
+
+GET http://localhost:8080/transaction
+Accept: application/json
+
+<> 2018-11-25T012451.500.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": 5
+}
+
+<> 2018-11-25T012440.202.txt
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": 5
+}
+
+<> 2018-11-25T011013.500.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T010947.406.txt
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T010801.406.txt
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T010120.500.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T122617.500.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T115528.500.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T114942.406.txt
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T114747.406.txt
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T114024.406.txt
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1},
+  "count": -5
+}
+
+<> 2018-11-25T103509.406.txt
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item_id": 1,
+  "owner_id": 1,
+  "count": -5
+}
+
+<> 2018-11-25T103417.500.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": 1,
+  "owner": 1,
+  "count": -5
+}
+
+<> 2018-11-25T103313.400.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "itemid": 1,
+  "ownerid": 1,
+  "count": -5
+}
+
+<> 2018-11-25T102617.500.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "title": "test item2111",
+  "description": "test item description2111111111111111111111",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-25T102506.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "title": "test item2111",
+  "description": "test item description2111111111111111111111",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T081651.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T081413.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "title": "test item2111",
+  "description": "test item description2111111111111111111111",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T081404.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "title": "test item2111",
+  "description": "test item description2111111111111111111111",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T081343.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "test item2111",
+  "description": "test item description2111111111111111111111",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T081330.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T075250.200.json
+
+###
+
+DELETE http://localhost:8080/items/itemid/5
+
+<> 2018-11-22T075245.202.txt
+
+###
+
+DELETE http://localhost:8080/items/itemid/51
+
+<> 2018-11-22T075235.404.txt
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T075212.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "test item2111",
+  "description": "test item description2111111111111111111111",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T075206.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T075139.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 7,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T075135.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T075114.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 67,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T075110.200.json
+
+###
+
+POST http://localhost:8080/owners
+Content-Type: application/json
+
+{
+  "first_name": "John",
+  "last_name": "Super",
+  "company_name": "IT company"
+}
+
+<> 2018-11-22T075100.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T075043.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 67,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T075038.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T075020.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 3,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T075016.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T075004.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T074954.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T074942.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T074930.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T074925.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T074923.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T074921.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T074912.200.json
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "test item2",
+  "description": "test item description2",
+  "count": 20,
+  "price": 2000,
+  "date_stor": "2018-11-21T00:00:00"
+}
+
+<> 2018-11-22T074905.200.json
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+
+<> 2018-11-22T074854.200.json
+
+###
+
