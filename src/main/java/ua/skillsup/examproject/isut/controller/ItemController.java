@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.skillsup.examproject.isut.controller.dto.ItemDto;
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.entity.Item;
+import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 import ua.skillsup.examproject.isut.service.ActionService;
 
 @RestController
@@ -22,8 +24,14 @@ public class ItemController {
     public Iterable<ItemDto> getAllItems() {return service.getAllItems();}
 
     @PostMapping(consumes = {"application/json"})
-    public long addItem(@RequestBody Item item) {
-        return service.createItem(item);
+    public ResponseEntity<String> addItem(@RequestBody ItemDto itemDto, @RequestBody OwnerDto ownerDto)
+    {
+        try{
+            Long itemId = new Long(service.createItem(itemDto, ownerDto));
+            return new ResponseEntity<String>("Item id = "+ itemId.toString()+" added correctly.", HttpStatus.ACCEPTED);
+        }catch (NotEnoughDataToProcessTransaction ex) {
+            return new ResponseEntity<String>(ex.getMessage()+" Item was not added correctly.", HttpStatus.ACCEPTED);
+        }
     }
 
 

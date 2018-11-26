@@ -1,5 +1,7 @@
 package ua.skillsup.examproject.isut.dao.entity;
 
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,13 @@ public class Owner {
         this.first_name = first_name;
         this.last_name = last_name;
         this.company_name = company_name;
+    }
+
+    public Owner(OwnerDto ownerDto){
+        this.company_name = ownerDto.getCmpname();
+        this.first_name = ownerDto.getFname();
+        this.last_name = ownerDto.getLname();
+        this.id = ownerDto.getId();
     }
 
     @Id

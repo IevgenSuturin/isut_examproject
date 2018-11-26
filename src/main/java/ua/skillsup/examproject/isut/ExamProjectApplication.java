@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
+import ua.skillsup.examproject.isut.controller.dto.ItemDto;
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 import ua.skillsup.examproject.isut.service.ActionService;
@@ -24,11 +26,14 @@ public class ExamProjectApplication {
     @Bean
     public CommandLineRunner initItemData (ActionService service){
         return args -> {
-          service.createItem(new Item("TV Samsung", "Samsung"));
-          service.createItem(new Item("TV LG", "LG"));
+          Owner owner1 = new Owner("John", "Smith", "Gaget International");
+          service.createOwner(owner1);
+          Owner owner2 = new Owner("Eric", "Smith", "Gaget International");
+          service.createOwner(owner2);
 
-          service.createOwner(new Owner("John", "Smith", "Gaget International"));
-          service.createOwner(new Owner("Eric", "Smith", "Gaget International"));
+          service.createItem(new ItemDto(new Item("TV Samsung", "Samsung")), new OwnerDto(owner1));
+          service.createItem(new ItemDto(new Item("TV LG", "LG")), new OwnerDto(owner2));
+
         };
     }
 

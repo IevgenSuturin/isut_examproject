@@ -42,8 +42,19 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public long createItem(Item item) {
-       return itemRepository.create(item);
+    public long createItem(ItemDto itemDto, OwnerDto ownerDto) throws NotEnoughDataToProcessTransaction {
+       Item item = new Item(itemDto);
+       Owner owner = new Owner(ownerDto);
+       if(!ownerRepository.exist(owner.getId())){
+           throw new NotEnoughDataToProcessTransaction("Owner not found!");
+       }
+        long itemId = itemRepository.create(item);
+       if(accountRepository.getAccountByOwnerAndItem(owner, item) != null)
+       {
+
+           accountRepository.create(new Account(item, owner, item.getCount()));
+       }
+       return itemId;
     }
 
     @Transactional

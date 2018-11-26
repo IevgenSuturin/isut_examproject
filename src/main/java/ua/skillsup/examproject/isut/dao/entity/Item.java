@@ -1,5 +1,7 @@
 package ua.skillsup.examproject.isut.dao.entity;
 
+import ua.skillsup.examproject.isut.controller.dto.ItemDto;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,6 +23,11 @@ public class Item {
         this.date_stor = LocalDateTime.now().plusYears(1);
     }
 
+    public Item (ItemDto itemDto){
+        this.title = itemDto.getTitle();
+        this.description = itemDto.getDesc();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ItemIdGenerator")
     @SequenceGenerator(name = "ItemIdGenerator", sequenceName = "item_sequence")
@@ -31,7 +38,7 @@ public class Item {
     @Column(name = "DESCRIPTION")
     private String description;
     @Column(name = "COUNT", nullable = false)
-    private long count;
+    private int count;
     @Column(name = "PRICE")
     private long price;
     @Column(name = "DATE_STOR")
@@ -99,11 +106,11 @@ public class Item {
         this.description = description;
     }
 
-    public long getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(long count) {
+    public void setCount(int count) {
         this.count = count;
     }
 

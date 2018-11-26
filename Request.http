@@ -61,11 +61,15 @@ POST http://localhost:8080/items
 Content-Type: application/json
 
 {
+  "itemDto":{
   "title": "test item2111",
-  "description": "test item description2111111111111111111111",
+  "desc": "test item description2111111111111111111111",
   "count": 20,
-  "price": 2000,
-  "date_stor": "2018-11-21T00:00:00"
+  "price": 2000
+  },
+  "ownerDto":{
+  "id": 1
+  }
 }
 
 ###
@@ -77,7 +81,7 @@ Content-Type: application/json
 {
   "item": {"id": 1},
   "owner": {"id": 1 },
-  "count": -4
+  "count": 4
 }
 
 ###
