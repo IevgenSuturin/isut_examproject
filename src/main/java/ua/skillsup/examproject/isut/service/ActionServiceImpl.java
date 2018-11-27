@@ -42,18 +42,20 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public long createItem(ItemDto itemDto, OwnerDto ownerDto) throws NotEnoughDataToProcessTransaction {
+    public long createItem(ItemDto itemDto, long ownerId) throws NotEnoughDataToProcessTransaction {
        Item item = new Item(itemDto);
-       Owner owner = new Owner(ownerDto);
-       if(!ownerRepository.exist(owner.getId())){
+       Owner owner = ownerRepository.getOne(ownerId);
+       if(owner == null){
            throw new NotEnoughDataToProcessTransaction("Owner not found!");
        }
-        long itemId = itemRepository.create(item);
-       if(accountRepository.getAccountByOwnerAndItem(owner, item) != null)
+       long itemId = itemRepository.create(item);
+       long count = item.getCount();
+       item.setCount(0);
+       createTransaction(new Transaction(item,owner,count));
+/*       if(accountRepository.getAccountByOwnerAndItem(owner, item) != null)
        {
-
            accountRepository.create(new Account(item, owner, item.getCount()));
-       }
+       }*/
        return itemId;
     }
 
@@ -130,7 +132,7 @@ public class ActionServiceImpl implements ActionService {
               throw new NotEnoughDataToProcessTransaction("The amount of account for credit transaction les than transaction amount!");
         }
 
-        if(item.getCount()+item.getCount()<0){
+        if(item.getCount()+transaction.getCount()<0){
              throw new NotEnoughDataToProcessTransaction("The amount of item for credit transaction les than transaction amount!");
         }
 

@@ -7,14 +7,16 @@ public class ItemDto {
         id = item.getId();
         title = item.getTitle();
         desc = item.getDescription();
+        count = item.getCount();
+        price = item.getPrice();
     }
     protected ItemDto(){}
 
     private long id;
     private String title;
     private String desc;
-    private int count;
-    private int price;
+    private long count;
+    private long price;
 
     public long getId() {
         return id;
@@ -40,19 +42,19 @@ public class ItemDto {
         this.desc = desc;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
-    public int getPrice() {
+    public long getPriceDto() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 }

@@ -31,8 +31,8 @@ public class ExamProjectApplication {
           Owner owner2 = new Owner("Eric", "Smith", "Gaget International");
           service.createOwner(owner2);
 
-          service.createItem(new ItemDto(new Item("TV Samsung", "Samsung")), new OwnerDto(owner1));
-          service.createItem(new ItemDto(new Item("TV LG", "LG")), new OwnerDto(owner2));
+          service.createItem(new ItemDto(new Item("TV Samsung", "Samsung")), owner1.getId());
+          service.createItem(new ItemDto(new Item("TV LG", "LG")), owner2.getId());
 
         };
     }

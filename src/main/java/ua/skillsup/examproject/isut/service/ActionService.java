@@ -18,7 +18,7 @@ public interface ActionService {
     Iterable<OwnerDto> getAllOwners();
     Iterable<TransDto> getAllTransactions();
 
-    long createItem(ItemDto itemDto, OwnerDto ownerDto) throws NotEnoughDataToProcessTransaction;
+    long createItem(ItemDto itemDto, long ownerid) throws NotEnoughDataToProcessTransaction;
     long createOwner(Owner owner);
     long createTransaction(Transaction transaction) throws NotEnoughDataToProcessTransaction;
 

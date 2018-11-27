@@ -23,11 +23,11 @@ public class ItemController {
     @GetMapping(produces = {"application/json"})
     public Iterable<ItemDto> getAllItems() {return service.getAllItems();}
 
-    @PostMapping(consumes = {"application/json"})
-    public ResponseEntity<String> addItem(@RequestBody ItemDto itemDto, @RequestBody OwnerDto ownerDto)
+    @PostMapping(consumes = {"application/json"}, value = "ownerid/{ownerId}")
+    public ResponseEntity<String> addItem(@RequestBody ItemDto itemDto, @PathVariable long ownerId)
     {
         try{
-            Long itemId = new Long(service.createItem(itemDto, ownerDto));
+            Long itemId = new Long(service.createItem(itemDto, ownerId));
             return new ResponseEntity<String>("Item id = "+ itemId.toString()+" added correctly.", HttpStatus.ACCEPTED);
         }catch (NotEnoughDataToProcessTransaction ex) {
             return new ResponseEntity<String>(ex.getMessage()+" Item was not added correctly.", HttpStatus.ACCEPTED);
@@ -36,7 +36,7 @@ public class ItemController {
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "itemid/{itemid}")
-    public ResponseEntity<String> deleteItem(@PathVariable int itemid)
+    public ResponseEntity<String> deleteItem(@PathVariable long itemid)
     {
         try {
             if (service.deleteItem(new Long(itemid))) {

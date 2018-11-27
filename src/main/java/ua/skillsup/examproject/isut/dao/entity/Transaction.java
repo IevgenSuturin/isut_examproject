@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Transaction {
     protected Transaction(){}
 
-    public Transaction(Item item, Owner owner, int count) {
+    public Transaction(Item item, Owner owner, long count) {
         this.item = item;
         this.owner = owner;
         this.count = count;
@@ -31,7 +31,7 @@ public class Transaction {
     private Owner owner;
 
     @Column(name = "count")
-    private int count;
+    private long count;
 
     @Column(name = "data_trans")
     private LocalDateTime date_stor;
@@ -59,11 +59,11 @@ public class Transaction {
                 '}';
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
 

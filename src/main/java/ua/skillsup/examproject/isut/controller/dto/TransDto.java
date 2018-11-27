@@ -17,7 +17,7 @@ public class TransDto {
     private long id;
     private ItemDto itemDto;
     private OwnerDto ownerDto;
-    private int count;
+    private long count;
     private LocalDateTime localDate;
 
     public long getId() {
@@ -32,7 +32,7 @@ public class TransDto {
         return ownerDto;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 

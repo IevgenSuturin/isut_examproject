@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Account {
     protected Account(){}
 
-    public Account(Item item, Owner owner, int count) {
+    public Account(Item item, Owner owner, long count) {
         this.item = item;
         this.owner = owner;
         this.count = count;
@@ -29,7 +29,7 @@ public class Account {
     private Owner owner;
 
     @Column(name = "count")
-    private int count;
+    private long count;
 
     @Override
     public boolean equals(Object o) {
@@ -76,11 +76,11 @@ public class Account {
         this.owner = owner;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
 }

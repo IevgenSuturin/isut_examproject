@@ -26,6 +26,8 @@ public class Item {
     public Item (ItemDto itemDto){
         this.title = itemDto.getTitle();
         this.description = itemDto.getDesc();
+        this.price = itemDto.getPriceDto();
+        this.count = itemDto.getCount();
     }
 
     @Id
@@ -38,7 +40,7 @@ public class Item {
     @Column(name = "DESCRIPTION")
     private String description;
     @Column(name = "COUNT", nullable = false)
-    private int count;
+    private long count;
     @Column(name = "PRICE")
     private long price;
     @Column(name = "DATE_STOR")
@@ -106,11 +108,11 @@ public class Item {
         this.description = description;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
