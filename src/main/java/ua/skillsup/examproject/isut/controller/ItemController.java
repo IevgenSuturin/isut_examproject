@@ -10,6 +10,8 @@ import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 import ua.skillsup.examproject.isut.service.ActionService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("items")
 public class ItemController {
@@ -34,6 +36,18 @@ public class ItemController {
         }
     }
 
+    @PostMapping(consumes = {"application/json"}, value = "withdraw/ownerid/{ownerId}")
+    public ResponseEntity<String> withdrawItem(@RequestBody List<ItemDto> itemDtoList, @PathVariable long ownerId)
+    {
+        try {
+            if (service.withdrawItems(itemDtoList, ownerId)) {
+                return new ResponseEntity<String>("Item list was withdrawed for owner id=" + new Long(ownerId).toString(), HttpStatus.ACCEPTED);
+            }
+        } catch (NotEnoughDataToProcessTransaction ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<String>("Item list was not withdrawed for owner id="+new Long(ownerId).toString(), HttpStatus.NOT_ACCEPTABLE);
+    }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "itemid/{itemid}")
     public ResponseEntity<String> deleteItem(@PathVariable long itemid)

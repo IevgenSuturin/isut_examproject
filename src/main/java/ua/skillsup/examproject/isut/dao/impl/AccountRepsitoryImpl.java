@@ -55,7 +55,7 @@ public class AccountRepsitoryImpl implements AccountRepository {
 
     @Override
     public Iterable<Account> findAll(){
-        return null;
+        return entityManager.createQuery("from Account", Account.class).getResultList();
     }
 
     @Override

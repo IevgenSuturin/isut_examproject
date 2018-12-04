@@ -8,6 +8,7 @@ import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -65,5 +66,11 @@ public class OwnerRepositoryImpl implements OwnerRepository {
     @Override
     public Optional<Owner> findByFirstName(String fname) {
         return Optional.empty();
+    }
+
+    @Override
+    public List<Owner> getActiveOwners() {
+        return entityManager.createQuery("from Owner owner " +
+                "where  owner IN (select owner from Account acc where acc.count>0) ", Owner.class).getResultList();
     }
 }

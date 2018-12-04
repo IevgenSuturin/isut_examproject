@@ -1,19 +1,17 @@
 package ua.skillsup.examproject.isut.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.skillsup.examproject.isut.controller.dto.AccDto;
 import ua.skillsup.examproject.isut.controller.dto.ItemDto;
 import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.controller.dto.TransDto;
 import ua.skillsup.examproject.isut.dao.*;
 import ua.skillsup.examproject.isut.dao.entity.*;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
-import ua.skillsup.examproject.isut.exceptions.NotImplementedDataAccessMethod;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ActionServiceImpl implements ActionService {
@@ -44,24 +42,52 @@ public class ActionServiceImpl implements ActionService {
     @Override
     public long createItem(ItemDto itemDto, long ownerId) throws NotEnoughDataToProcessTransaction {
        Item item = new Item(itemDto);
-       Owner owner = ownerRepository.getOne(ownerId);
-       if(owner == null){
-           throw new NotEnoughDataToProcessTransaction("Owner not found!");
-       }
        long itemId = itemRepository.create(item);
        long count = item.getCount();
        item.setCount(0);
-       createTransaction(new Transaction(item,owner,count));
-/*       if(accountRepository.getAccountByOwnerAndItem(owner, item) != null)
-       {
-           accountRepository.create(new Account(item, owner, item.getCount()));
-       }*/
+       createTransaction(itemId, ownerId, count);
        return itemId;
     }
 
     @Transactional
     @Override
-    public Iterable<OwnerDto> getAllOwners() {
+    public boolean withdrawItems(List<ItemDto> itemDtoList, long ownerId) throws NotEnoughDataToProcessTransaction
+    {
+        boolean result = false;
+        for (ItemDto itemDto:itemDtoList) {
+            Item item = itemRepository.getOne(itemDto.getId());
+            if (item == null){
+                continue;
+            }
+            result = true;
+            createTransaction(item.getId(), ownerId, (-1)*itemDto.getCount());
+        }
+        return result;
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteItem(long id) {
+        Item item = itemRepository.getOne(id);
+        if(item !=null ) {
+           return itemRepository.delete(item);
+        }
+        return false;
+    }
+
+    @Transactional
+    @Override
+    public Iterable<OwnerDto> getActiveOwners() {
+        List<OwnerDto> result = new ArrayList<>();
+        for (Owner owner: ownerRepository.getActiveOwners()) {
+            result.add(new OwnerDto(owner));
+        }
+        return result;
+    }
+
+    @Transactional
+    @Override
+    public Iterable<OwnerDto> getAllOwners(){
         List<OwnerDto> result = new ArrayList<>();
         for (Owner owner: ownerRepository.findAll()) {
             result.add(new OwnerDto(owner));
@@ -77,13 +103,6 @@ public class ActionServiceImpl implements ActionService {
             result.add(new TransDto(trans));
         }
         return result;
-    }
-
-    @Transactional
-    @Override
-    public boolean deleteItem(long id) {
-        Item item = itemRepository.getOne(id);
-        return itemRepository.delete(item);
     }
 
     @Transactional
@@ -107,41 +126,50 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public long createTransaction(Transaction transaction) throws NotEnoughDataToProcessTransaction {
-        Owner owner = ownerRepository.getOne(transaction.getOwner().getId());
+    public long createTransaction(Long itemId, Long ownerId, Long count) throws NotEnoughDataToProcessTransaction {
+        Owner owner = ownerRepository.getOne(ownerId);
         if ( owner == null ){
             throw new NotEnoughDataToProcessTransaction("Owner not found!");
         }
-        Item item  = itemRepository.getOne(transaction.getItem().getId());
+        Item item  = itemRepository.getOne(itemId);
         if ( item == null ){
             throw new NotEnoughDataToProcessTransaction("Item not found!");
         }
 
         Account account = accountRepository.getAccountByOwnerAndItem(owner, item);
         if(account == null){
-            if (transaction.getCount()>=0) {
+            if (count>=0) {
                 account = new Account(item, owner, 0);
                 account.setId(accountRepository.create(account));
             }
-            if(transaction.getCount()<0) {
+            if(count<0) {
                throw new NotEnoughDataToProcessTransaction("No account for credit transaction!");
             }
         }
 
-        if(account.getCount()+transaction.getCount()<0){
+        if(account.getCount()+count<0){
               throw new NotEnoughDataToProcessTransaction("The amount of account for credit transaction les than transaction amount!");
         }
 
-        if(item.getCount()+transaction.getCount()<0){
+        if(item.getCount()+count<0){
              throw new NotEnoughDataToProcessTransaction("The amount of item for credit transaction les than transaction amount!");
         }
 
-        account.setCount(account.getCount()+transaction.getCount());
-        item.setCount(item.getCount()+transaction.getCount());
+        account.setCount(account.getCount()+count);
+        item.setCount(item.getCount()+count);
 
         accountRepository.update(account);
         itemRepository.update(item);
 
-        return transRepository.create(transaction);
+        return transRepository.create(new Transaction(item, owner, count));
+    }
+
+    @Override
+    public Iterable<AccDto> getAllAccounts() {
+        List<AccDto> result = new ArrayList<>();
+        for (Account account:accountRepository.findAll()) {
+            result.add(new AccDto(account));
+        }
+        return result;
     }
 }

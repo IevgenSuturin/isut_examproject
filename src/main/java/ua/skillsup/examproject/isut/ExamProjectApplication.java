@@ -10,6 +10,8 @@ import ua.skillsup.examproject.isut.controller.dto.ItemDto;
 import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
+import ua.skillsup.examproject.isut.dao.entity.Transaction;
+import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 import ua.skillsup.examproject.isut.service.ActionService;
 
 @ImportResource("classpath:/spring/db-context.xml")
@@ -30,10 +32,12 @@ public class ExamProjectApplication {
           service.createOwner(owner1);
           Owner owner2 = new Owner("Eric", "Smith", "Gaget International");
           service.createOwner(owner2);
-
-          service.createItem(new ItemDto(new Item("TV Samsung", "Samsung")), owner1.getId());
-          service.createItem(new ItemDto(new Item("TV LG", "LG")), owner2.getId());
-
+          Item item1 = new Item("TV Samsung", "Samsung");
+          service.createItem(new ItemDto(item1), owner1.getId());
+          Item item2 = new Item("TV LG", "LG");
+          service.createItem(new ItemDto(item2), owner2.getId());
+         // service.createTransaction(item1.getId(), owner1.getId(), new Long(10));
+         // service.createTransaction(item2.getId(), owner1.getId(), new Long(20));
         };
     }
 
