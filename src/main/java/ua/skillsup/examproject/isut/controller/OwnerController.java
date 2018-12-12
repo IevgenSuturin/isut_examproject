@@ -21,7 +21,7 @@ public class OwnerController {
 
     @GetMapping(produces = {"application/json"})
     public Iterable<OwnerDto> getActiveOwners(){
-        return service.getActiveOwners();
+        return service.getAllOwners();
     }
 
     @PostMapping(consumes = {"application/json"})
@@ -29,8 +29,8 @@ public class OwnerController {
         return service.createOwner(owner);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "ownerid/{ownerid}")
-    public ResponseEntity<String> deleteOwner(@PathVariable long ownerid){
+    @RequestMapping(method = RequestMethod.DELETE, value = "{ownerid}")
+    public ResponseEntity<String> deleteOwner(@PathVariable Long ownerid){
         if(service.deleteOwner(ownerid)){
             return new ResponseEntity<String>( "Owner id:"+ownerid+" was deleted", HttpStatus.ACCEPTED);
 

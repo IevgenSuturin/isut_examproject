@@ -14,13 +14,13 @@ public class TransDto {
         this.localDate = transaction.getDate_stor();
     }
 
-    private long id;
+    private Long id;
     private ItemDto itemDto;
     private OwnerDto ownerDto;
     private long count;
     private LocalDateTime localDate;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

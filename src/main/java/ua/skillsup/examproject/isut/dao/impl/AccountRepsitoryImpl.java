@@ -1,5 +1,7 @@
 package ua.skillsup.examproject.isut.dao.impl;
 
+import org.hibernate.Criteria;
+import org.hibernate.jpa.QueryHints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,11 @@ import ua.skillsup.examproject.isut.dao.entity.Owner;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.QueryHint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class AccountRepsitoryImpl implements AccountRepository {
@@ -29,8 +33,8 @@ public class AccountRepsitoryImpl implements AccountRepository {
     }
 
     @Override
-    public long create(Account account) {
-        if(account != null) {
+    public Long create(Account account) {
+        if(account.getId() == null) {
             entityManager.persist(account);
         }
         return account.getId();
@@ -38,7 +42,7 @@ public class AccountRepsitoryImpl implements AccountRepository {
 
     @Override
     public void update(Account account)  {
-        if(account.getId() != 0){
+        if(account.getId() != null){
             entityManager.merge(account);
         }
     }
@@ -74,7 +78,7 @@ public class AccountRepsitoryImpl implements AccountRepository {
         List<Account> list = new ArrayList<>();
         try{
             list = entityManager.createQuery("from Account a where a.count > :number  and a.owner=:owner", Account.class).
-                    setParameter("number", 0).
+                    setParameter("number", 0L).
                     setParameter("owner", owner).getResultList();
         }catch (NoResultException ex) {
             return false;
@@ -86,5 +90,19 @@ public class AccountRepsitoryImpl implements AccountRepository {
     public void deleteOwnerAccounts(Owner owner) {
         entityManager.createQuery("DELETE from Account a where a.owner = :owner").
                 setParameter("owner",owner  ).executeUpdate();
+    }
+
+    @Override
+    public Iterable<Owner> getAllActiveOwners() {
+        List<Owner> list = new ArrayList<>();
+        try{
+            list = entityManager.createQuery("select distinct owner from Account a where a.count > :number ", Owner.class)
+                    .setParameter("number", Long.valueOf(0)).getResultList()
+                    .stream().distinct().collect(Collectors.toList());
+        }catch (NoResultException ex) {
+            return null;
+        }
+
+        return list;
     }
 }

@@ -34,18 +34,16 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
-    public long create(Item item) {
-        if(item.getId() == 0){
+    public Long create(Item item) {
+        if(item.getId() == null){
             entityManager.persist(item);
-        }else {
-            entityManager.merge(item);
         }
         return  item.getId();
     }
 
     @Override
     public void update(Item item) {
-        if(item.getId() != 0){
+        if(item.getId() != null){
             entityManager.merge(item);
         }
     }

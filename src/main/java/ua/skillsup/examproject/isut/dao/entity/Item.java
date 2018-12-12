@@ -20,7 +20,7 @@ public class Item {
         this.description = description;
         this.count = 0;
         this.price = 0;
-        this.date_stor = LocalDateTime.now().plusYears(1);
+        this.dateStore = LocalDateTime.now().plusYears(1);
     }
 
     public Item (ItemDto itemDto){
@@ -34,7 +34,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ItemIdGenerator")
     @SequenceGenerator(name = "ItemIdGenerator", sequenceName = "item_sequence")
     @Column(name = "id")
-    private long id;
+    private Long id;
     @Column(name = "TITLE", nullable = false)
     private String title;
     @Column(name = "DESCRIPTION")
@@ -44,7 +44,7 @@ public class Item {
     @Column(name = "PRICE")
     private long price;
     @Column(name = "DATE_STOR")
-    private LocalDateTime date_stor;
+    private LocalDateTime dateStore;
 
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true )
@@ -80,15 +80,15 @@ public class Item {
                 ", description='" + description + '\'' +
                 ", count=" + count +
                 ", price=" + price +
-                ", date_stor=" + date_stor +
+                ", dateStore=" + dateStore +
                 '}';
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -125,10 +125,10 @@ public class Item {
     }
 
     public LocalDateTime getDate_stor() {
-        return date_stor;
+        return dateStore;
     }
 
-    public void setDate_stor(LocalDateTime date_stor) {
-        this.date_stor = date_stor;
+    public void setDate_stor(LocalDateTime dateStore) {
+        this.dateStore = dateStore;
     }
 }

@@ -29,7 +29,7 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OwnerGenerator")
     @SequenceGenerator(name = "OwnerGenerator", sequenceName = "owner_sequence")
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "FNAME")
     private String first_name;
@@ -42,6 +42,9 @@ public class Owner {
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Account> accounts = new ArrayList<>();
 
     public void addTransaction(Transaction transaction){
         transactions.add(transaction);
@@ -63,11 +66,11 @@ public class Owner {
     @Override
     public int hashCode() { return Objects.hash(id); }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -103,5 +106,21 @@ public class Owner {
 
     public void setCompany_name(String company_name) {
         this.company_name = company_name;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

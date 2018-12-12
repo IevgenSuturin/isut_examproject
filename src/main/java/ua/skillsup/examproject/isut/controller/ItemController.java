@@ -26,10 +26,10 @@ public class ItemController {
     public Iterable<ItemDto> getAllItems() {return service.getAllItems();}
 
     @PostMapping(consumes = {"application/json"}, value = "ownerid/{ownerId}")
-    public ResponseEntity<String> addItem(@RequestBody ItemDto itemDto, @PathVariable long ownerId)
+    public ResponseEntity<String> addItem(@RequestBody ItemDto itemDto, @PathVariable Long ownerId)
     {
         try{
-            Long itemId = new Long(service.createItem(itemDto, ownerId));
+            Long itemId = service.createItem(itemDto, ownerId);
             return new ResponseEntity<String>("Item id = "+ itemId.toString()+" added correctly.", HttpStatus.ACCEPTED);
         }catch (NotEnoughDataToProcessTransaction ex) {
             return new ResponseEntity<String>(ex.getMessage()+" Item was not added correctly.", HttpStatus.ACCEPTED);
@@ -37,23 +37,23 @@ public class ItemController {
     }
 
     @PostMapping(consumes = {"application/json"}, value = "withdraw/ownerid/{ownerId}")
-    public ResponseEntity<String> withdrawItem(@RequestBody List<ItemDto> itemDtoList, @PathVariable long ownerId)
+    public ResponseEntity<String> withdrawItem(@RequestBody List<ItemDto> itemDtoList, @PathVariable Long ownerId)
     {
         try {
             if (service.withdrawItems(itemDtoList, ownerId)) {
-                return new ResponseEntity<String>("Item list was withdrawed for owner id=" + new Long(ownerId).toString(), HttpStatus.ACCEPTED);
+                return new ResponseEntity<String>("Item list was withdrawed for owner id=" + ownerId.toString(), HttpStatus.ACCEPTED);
             }
         } catch (NotEnoughDataToProcessTransaction ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity<String>("Item list was not withdrawed for owner id="+new Long(ownerId).toString(), HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<String>("Item list was not withdrawed for owner id="+ownerId.toString(), HttpStatus.NOT_ACCEPTABLE);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "itemid/{itemid}")
-    public ResponseEntity<String> deleteItem(@PathVariable long itemid)
+    public ResponseEntity<String> deleteItem(@PathVariable Long itemid)
     {
         try {
-            if (service.deleteItem(new Long(itemid))) {
+            if (service.deleteItem(itemid)) {
                 return new ResponseEntity<String>("Data deleted successfully", HttpStatus.ACCEPTED);
             }else{
                 return new ResponseEntity<String>( "Record was not deleted", HttpStatus.NOT_FOUND);

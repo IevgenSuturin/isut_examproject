@@ -23,18 +23,16 @@ public class OwnerRepositoryImpl implements OwnerRepository {
     }
 
     @Override
-    public long create(Owner owner) {
-        if(owner.getId() == 0){
+    public Long create(Owner owner) {
+        if(owner.getId() == null){
             entityManager.persist(owner);
-        }else {
-            entityManager.merge(owner);
         }
         return  owner.getId();
     }
 
     @Override
     public void update(Owner owner) {
-        if(owner.getId() != 0){
+        if(owner.getId() != null){
             entityManager.merge(owner);
         }
     }

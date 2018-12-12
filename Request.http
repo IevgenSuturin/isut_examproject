@@ -19,7 +19,7 @@ GET http://localhost:8080/transaction
 Accept: application/json
 ###
 
-GET http://localhost:8080/acc
+GET http://localhost:8080/accounts
 Accept: application/json
 ###
 
@@ -49,12 +49,12 @@ Content-Type: application/json
 ###
 
 ### Send DELETE request with json body
-DELETE http://localhost:8080/items/itemid/5
+DELETE http://localhost:8080/items/itemid/3
 
 ###
 
 ### Send DELETE request with json body
-DELETE http://localhost:8080/owners/ownerid/4
+DELETE http://localhost:8080/owners/2
 
 ###
 
@@ -72,7 +72,7 @@ Content-Type: application/json
 
 
 ### Send POST request with json body
-POST http://localhost:8080/items/withdraw/ownerid/1
+POST http://localhost:8080/items/withdraw/ownerid/2
 Content-Type: application/json
 
 [
@@ -87,7 +87,7 @@ POST http://localhost:8080/transaction
 Content-Type: application/json
 
 {
-  "item": {"id": 1},
+  "item": {"id": 2},
   "owner": {"id": 2 },
   "count": 12
 }

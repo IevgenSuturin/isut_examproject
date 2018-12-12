@@ -22,8 +22,8 @@ public class TransRepositoryImpl implements TransRepository {
     }
 
     @Override
-    public long create(Transaction transaction) {
-        if(transaction != null) {
+    public Long create(Transaction transaction) {
+        if(transaction.getId() == null) {
             transaction.setDate_stor(LocalDateTime.now());
             entityManager.persist(transaction);
         }
@@ -51,6 +51,6 @@ public class TransRepositoryImpl implements TransRepository {
     @Override
     public void deleteOwnerTransactions(Owner owner) {
         entityManager.createQuery("DELETE from Transaction t where t.owner = :owner").
-                setParameter("owner",owner  ).executeUpdate();
+               setParameter("owner", owner).executeUpdate();
     }
 }

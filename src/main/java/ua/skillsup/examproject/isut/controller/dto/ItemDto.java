@@ -12,17 +12,17 @@ public class ItemDto {
     }
     protected ItemDto(){}
 
-    private long id;
+    private Long id;
     private String title;
     private String desc;
     private long count;
     private long price;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

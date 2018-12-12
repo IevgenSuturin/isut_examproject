@@ -12,12 +12,12 @@ public class AccDto {
         this.count = account.getCount();
     }
 
-    private long id;
-    private long item_id;
-    private long owner_id;
+    private Long id;
+    private Long item_id;
+    private Long owner_id;
     private long count;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

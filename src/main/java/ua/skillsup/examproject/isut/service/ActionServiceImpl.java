@@ -40,7 +40,7 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public long createItem(ItemDto itemDto, long ownerId) throws NotEnoughDataToProcessTransaction {
+    public long createItem(ItemDto itemDto, Long ownerId) throws NotEnoughDataToProcessTransaction {
        Item item = new Item(itemDto);
        long itemId = itemRepository.create(item);
        long count = item.getCount();
@@ -51,7 +51,7 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public boolean withdrawItems(List<ItemDto> itemDtoList, long ownerId) throws NotEnoughDataToProcessTransaction
+    public boolean withdrawItems(List<ItemDto> itemDtoList, Long ownerId) throws NotEnoughDataToProcessTransaction
     {
         boolean result = false;
         for (ItemDto itemDto:itemDtoList) {
@@ -67,7 +67,7 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public boolean deleteItem(long id) {
+    public boolean deleteItem(Long id) {
         Item item = itemRepository.getOne(id);
         if(item !=null ) {
            return itemRepository.delete(item);
@@ -113,7 +113,7 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public boolean deleteOwner(long id) {
+    public boolean deleteOwner(Long id) {
         Owner owner = ownerRepository.getOne(id);
         if(owner != null && !accountRepository.isActiveOwnerAccountExists(owner))
         {
@@ -164,11 +164,22 @@ public class ActionServiceImpl implements ActionService {
         return transRepository.create(new Transaction(item, owner, count));
     }
 
+    @Transactional
     @Override
     public Iterable<AccDto> getAllAccounts() {
         List<AccDto> result = new ArrayList<>();
         for (Account account:accountRepository.findAll()) {
             result.add(new AccDto(account));
+        }
+        return result;
+    }
+
+    @Transactional
+    @Override
+    public Iterable<OwnerDto> getAllActiveOwners() {
+        List<OwnerDto> result = new ArrayList<>();
+        for (Owner owner:accountRepository.getAllActiveOwners()) {
+            result.add(new OwnerDto(owner));
         }
         return result;
     }

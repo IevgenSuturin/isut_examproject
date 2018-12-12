@@ -12,16 +12,16 @@ public class OwnerDto {
 
     protected OwnerDto(){}
 
-    private long id;
+    private Long id;
     private String fname;
     private String lname;
     private String cmpname;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -23,13 +23,14 @@ public interface ActionService {
     Iterable<OwnerDto> getAllOwners();
     Iterable<TransDto> getAllTransactions();
     Iterable<AccDto> getAllAccounts();
+    Iterable<OwnerDto> getAllActiveOwners();
 
-    long createItem(ItemDto itemDto, long ownerid) throws NotEnoughDataToProcessTransaction;
+    long createItem(ItemDto itemDto, Long ownerid) throws NotEnoughDataToProcessTransaction;
     long createOwner(Owner owner);
     long createTransaction(Long itemId, Long ownerId, Long count) throws NotEnoughDataToProcessTransaction;
 
-    boolean withdrawItems(List<ItemDto> itemDtoList, long ownerId) throws NotEnoughDataToProcessTransaction;
+    boolean withdrawItems(List<ItemDto> itemDtoList, Long ownerId) throws NotEnoughDataToProcessTransaction;
 
-    boolean deleteItem(final long id);
-    boolean deleteOwner(final long id);
+    boolean deleteItem(final Long id);
+    boolean deleteOwner(final Long id);
 }

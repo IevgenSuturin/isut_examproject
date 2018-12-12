@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ua.skillsup.examproject.isut.controller.dto.AccDto;
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.service.ActionService;
 
 @Controller
-@RequestMapping("acc")
+@RequestMapping("accounts")
 public class AccountController {
     private final ActionService service;
 
@@ -18,6 +20,6 @@ public class AccountController {
     }
 
     @GetMapping(produces = {"application/json"})
-    public Iterable<AccDto> getAllAccounts() {return service.getAllAccounts();}
+    public @ResponseBody Iterable<AccDto> getAllActiveOwners() {return service.getAllAccounts();}
 
 }

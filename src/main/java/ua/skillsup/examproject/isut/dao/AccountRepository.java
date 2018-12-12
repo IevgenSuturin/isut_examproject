@@ -8,4 +8,5 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     Account getAccountByOwnerAndItem(Owner owner, Item item);
     boolean isActiveOwnerAccountExists(Owner owner);
     void deleteOwnerAccounts(Owner owner);
+    Iterable<Owner> getAllActiveOwners();
 }
