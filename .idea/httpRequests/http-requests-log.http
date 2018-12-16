@@ -1,3 +1,313 @@
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T071327.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 7 },
+  "count": 10
+}
+
+<> 2018-12-16T071323.202.txt
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 6 },
+  "count": 10
+}
+
+<> 2018-12-16T071313.406.txt
+
+###
+
+POST http://localhost:8080/owners
+Content-Type: application/json
+
+{
+  "first_name": "John000000000000",
+  "last_name": "Super0000000555555",
+  "company_name": "IT company0000555"
+}
+
+<> 2018-12-16T071300.200.json
+
+###
+
+POST http://localhost:8080/owners
+Content-Type: application/json
+
+{
+  "first_name": "John00000000000055555",
+  "last_name": "Super000000055555555555",
+  "company_name": "IT company0000000005555555555"
+}
+
+<> 2018-12-16T071244.500.json
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T071214.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 5 },
+  "count": 1
+}
+
+<> 2018-12-16T071211.202.txt
+
+###
+
+POST http://localhost:8080/owners
+Content-Type: application/json
+
+{
+  "first_name": "John55555555",
+  "last_name": "Super55555555555",
+  "company_name": "IT company5555555555"
+}
+
+<> 2018-12-16T071156.200.json
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T071129.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 4 },
+  "count": 2
+}
+
+<> 2018-12-16T071126.202.txt
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T071108.200.json
+
+###
+
+POST http://localhost:8080/owners
+Content-Type: application/json
+
+{
+  "first_name": "John22",
+  "last_name": "Super22",
+  "company_name": "IT company22"
+}
+
+<> 2018-12-16T071101.200.json
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T071048.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 2},
+  "owner": {"id": 3 },
+  "count": 2
+}
+
+<> 2018-12-16T071045.202.txt
+
+###
+
+POST http://localhost:8080/owners
+Content-Type: application/json
+
+{
+  "first_name": "John",
+  "last_name": "Super",
+  "company_name": "IT company"
+}
+
+<> 2018-12-16T071034.200.json
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T071023.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 2},
+  "owner": {"id": 2 },
+  "count": 20
+}
+
+<> 2018-12-16T071018.202.txt
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T071005.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1 },
+  "count": 20
+}
+
+<> 2018-12-16T071001.202.txt
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T070656.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1 },
+  "count": 20
+}
+
+<> 2018-12-16T070652.202.txt
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T070632.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 2 },
+  "count": 10
+}
+
+<> 2018-12-16T070629.202.txt
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T070621.200.json
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T070510.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 2 },
+  "count": 10
+}
+
+<> 2018-12-16T070420.202.txt
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T070226.500.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 2 },
+  "count": 10
+}
+
+<> 2018-12-16T070155.202.txt
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 2 },
+  "count": 10
+}
+
+<> 2018-12-16T065953.202.txt
+
+###
+
 GET http://localhost:8080/statistic/getTrAmountForPeriod/1
 Accept: application/json
 
@@ -181,276 +491,6 @@ GET http://localhost:8080/statistic/getTrAmountForPeriod/0
 Accept: application/json
 
 <> 2018-12-16T025413.500.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T025206.500.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T025058.500.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T025015.500.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 2},
-  "owner": {"id": 2 },
-  "count": 1
-}
-
-<> 2018-12-16T022429.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 1},
-  "owner": {"id": 2 },
-  "count": 1
-}
-
-<> 2018-12-16T022411.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T022402.500.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T015131.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 1},
-  "owner": {"id": 2 },
-  "count": 1
-}
-
-<> 2018-12-16T015128.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T015117.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 2},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T015113.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T015106.200.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T013953.200.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T013734.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 2},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T013635.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T011959.500.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 2},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T011955.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T011501.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 2},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T011457.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T011443.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 1},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T011440.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T011232.500.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 1},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T011226.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T010927.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 1},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T010923.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T010900.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 2},
-  "owner": {"id": 2 },
-  "count": 12
-}
-
-<> 2018-12-16T010856.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-
-<> 2018-12-16T123701.200.json
 
 ###
 

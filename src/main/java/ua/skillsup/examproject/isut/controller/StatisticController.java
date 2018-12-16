@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ua.skillsup.examproject.isut.controller.dto.OwnerWithTotalPriceDto;
 import ua.skillsup.examproject.isut.controller.dto.TransInfoDto;
 import ua.skillsup.examproject.isut.service.ActionService;
 
@@ -23,6 +24,11 @@ public class StatisticController{
     @GetMapping(produces = {"application/json"}, value = "getTrAmountForPeriod/{typeOfPeriod}")
     public Iterable<TransInfoDto> getTransAmountForPeriod(@PathVariable short typeOfPeriod){
         return service.getStatisticForPeriod(typeOfPeriod);
+    }
+
+    @GetMapping(produces = {"application/json"}, value = "getMostActiveOwners")
+    public Iterable<OwnerWithTotalPriceDto> getMostActiveOwners(){
+        return service.getMostActiveOwners();
     }
 
 }

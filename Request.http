@@ -19,9 +19,9 @@ POST http://localhost:8080/owners
 Content-Type: application/json
 
 {
-  "first_name": "John",
-  "last_name": "Super",
-  "company_name": "IT company"
+  "first_name": "John000000000000",
+  "last_name": "Super0000000555555",
+  "company_name": "IT company0000555"
 }
 
 ### Send DELETE request with json body
@@ -69,7 +69,7 @@ Content-Type: application/json
 
 {
   "item": {"id": 1},
-  "owner": {"id": 2 },
+  "owner": {"id": 7 },
   "count": 10
 }
 
@@ -89,3 +89,7 @@ Accept: application/json
 GET http://localhost:8080/statistic/getTrAmountForPeriod/1
 Accept: application/json
 ###
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+###
+

@@ -28,4 +28,5 @@ public interface ActionService {
     boolean deleteOwner(final Long id);
 
     Iterable<TransInfoDto> getStatisticForPeriod(short periodKind);
+    Iterable<OwnerWithTotalPriceDto> getMostActiveOwners();
 }

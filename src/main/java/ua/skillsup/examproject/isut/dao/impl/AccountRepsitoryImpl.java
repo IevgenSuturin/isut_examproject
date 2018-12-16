@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ua.skillsup.examproject.isut.controller.dto.OwnerWithTotalPriceDto;
 import ua.skillsup.examproject.isut.dao.AccountRepository;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.entity.Account;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.QueryHint;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -104,5 +106,25 @@ public class AccountRepsitoryImpl implements AccountRepository {
         }
 
         return list;
+    }
+
+    @Override
+    public Iterable<OwnerWithTotalPriceDto> getMostActiveOwners() {
+        List<Object[]> list = new ArrayList<>();
+        List<OwnerWithTotalPriceDto> result = new ArrayList<>();
+
+        list = entityManager.createQuery("select a.owner, sum(a.count * i.price) from Account a join a.item i " +
+                "group by a.owner order by sum(a.count * i.price) desc" ).setMaxResults(5).getResultList();
+
+        Iterator<Object[]> iterator = list.iterator();
+        OwnerWithTotalPriceDto ownerWithTotalPriceDto;
+        while (iterator.hasNext()){
+            Object[] objects = iterator.next();
+            if(objects[0]!=null && objects[1]!=null) {
+                ownerWithTotalPriceDto = new OwnerWithTotalPriceDto((Owner) objects[0], (Long)objects[1]);
+                result.add(ownerWithTotalPriceDto);
+            }
+        }
+        return result;
     }
 }

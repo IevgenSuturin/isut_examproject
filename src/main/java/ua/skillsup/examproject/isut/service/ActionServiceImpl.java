@@ -192,4 +192,10 @@ public class ActionServiceImpl implements ActionService {
         result.add(transRepository.getStatisticForPeriod(start, false));
         return result;
     }
+
+    @Transactional
+    @Override
+    public Iterable<OwnerWithTotalPriceDto> getMostActiveOwners() {
+        return accountRepository.getMostActiveOwners();
+    }
 }
