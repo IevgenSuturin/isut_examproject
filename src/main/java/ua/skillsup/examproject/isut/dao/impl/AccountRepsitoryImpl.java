@@ -1,7 +1,5 @@
 package ua.skillsup.examproject.isut.dao.impl;
 
-import org.hibernate.Criteria;
-import org.hibernate.jpa.QueryHints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +11,11 @@ import ua.skillsup.examproject.isut.dao.entity.Account;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.QueryHint;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -77,7 +72,7 @@ public class AccountRepsitoryImpl implements AccountRepository {
 
     @Override
     public boolean isActiveOwnerAccountExists(Owner owner) {
-        List<Account> list = new ArrayList<>();
+        List<Account> list;
         try{
             list = entityManager.createQuery("from Account a where a.count > :number  and a.owner=:owner", Account.class).
                     setParameter("number", 0L).
@@ -110,7 +105,7 @@ public class AccountRepsitoryImpl implements AccountRepository {
 
     @Override
     public Iterable<OwnerWithTotalPriceDto> getMostActiveOwners() {
-        List<Object[]> list = new ArrayList<>();
+        List<Object[]> list;
         List<OwnerWithTotalPriceDto> result = new ArrayList<>();
 
         list = entityManager.createQuery("select a.owner, sum(a.count * i.price) from Account a join a.item i " +

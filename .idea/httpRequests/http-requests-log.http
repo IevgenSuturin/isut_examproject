@@ -1,3 +1,71 @@
+GET http://localhost:8080/statistic/getTrAmountForPeriod/1
+Accept: application/json
+
+<> 2018-12-16T101544.200.json
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T101540.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 1 },
+  "count": 10
+}
+
+<> 2018-12-16T101535.202.txt
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T101521.200.json
+
+###
+
+GET http://localhost:8080/statistic/getTrAmountForPeriod/1
+Accept: application/json
+
+<> 2018-12-16T101517.200.json
+
+###
+
+POST http://localhost:8080/transaction
+Content-Type: application/json
+
+{
+  "item": {"id": 1},
+  "owner": {"id": 7 },
+  "count": 10
+}
+
+<> 2018-12-16T101514.406.txt
+
+###
+
+GET http://localhost:8080/statistic/getTrAmountForPeriod/1
+Accept: application/json
+
+<> 2018-12-16T101508.200.json
+
+###
+
+GET http://localhost:8080/statistic/getMostActiveOwners
+Accept: application/json
+
+<> 2018-12-16T101500.200.json
+
+###
+
 GET http://localhost:8080/statistic/getMostActiveOwners
 Accept: application/json
 
@@ -417,80 +485,6 @@ Content-Type: application/json
 }
 
 <> 2018-12-16T030738.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T030729.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 1},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T030725.202.txt
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 1},
-  "owner": {"id": 2 },
-  "count": 10
-}
-
-<> 2018-12-16T030721.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T030701.200.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T030648.200.json
-
-###
-
-POST http://localhost:8080/transaction
-Content-Type: application/json
-
-{
-  "item": {"id": 2},
-  "owner": {"id": 2 },
-  "count": 1
-}
-
-<> 2018-12-16T030643.202.txt
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T030625.200.json
-
-###
-
-GET http://localhost:8080/statistic/getTrAmountForPeriod/0
-Accept: application/json
-
-<> 2018-12-16T025413.500.json
 
 ###
 

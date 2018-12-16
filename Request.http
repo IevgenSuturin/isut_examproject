@@ -69,7 +69,7 @@ Content-Type: application/json
 
 {
   "item": {"id": 1},
-  "owner": {"id": 7 },
+  "owner": {"id": 1 },
   "count": 10
 }
 

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 2,
+    "fname": "Eric",
+    "lname": "Smith",
+    "cmpname": "Gaget International",
+    "totalPrice": 0
+  },
+  {
+    "id": 1,
+    "fname": "John",
+    "lname": "Smith",
+    "cmpname": "Gaget International",
+    "totalPrice": 0
+  }
+]
