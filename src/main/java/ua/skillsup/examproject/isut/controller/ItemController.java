@@ -25,7 +25,7 @@ public class ItemController {
     @GetMapping(produces = {"application/json"})
     public Iterable<ItemDto> getAllItems() {return service.getAllItems();}
 
-    @PostMapping(consumes = {"application/json"}, value = "ownerid/{ownerId}")
+    @PostMapping(consumes = {"application/json"}, value = "{ownerId}")
     public ResponseEntity<String> addItem(@RequestBody ItemDto itemDto, @PathVariable Long ownerId)
     {
         try{
@@ -36,7 +36,7 @@ public class ItemController {
         }
     }
 
-    @PostMapping(consumes = {"application/json"}, value = "withdraw/ownerid/{ownerId}")
+    @PostMapping(consumes = {"application/json"}, value = "withdraw/{ownerId}")
     public ResponseEntity<String> withdrawItem(@RequestBody List<ItemDto> itemDtoList, @PathVariable Long ownerId)
     {
         try {
@@ -47,19 +47,5 @@ public class ItemController {
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<String>("Item list was not withdrawed for owner id="+ownerId.toString(), HttpStatus.NOT_ACCEPTABLE);
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "itemid/{itemid}")
-    public ResponseEntity<String> deleteItem(@PathVariable Long itemid)
-    {
-        try {
-            if (service.deleteItem(itemid)) {
-                return new ResponseEntity<String>("Data deleted successfully", HttpStatus.ACCEPTED);
-            }else{
-                return new ResponseEntity<String>( "Record was not deleted", HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception ex){
-            return new ResponseEntity<String>( ex.getMessage()+" Record was not deleted", HttpStatus.NOT_FOUND);
-        }
     }
 }

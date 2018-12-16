@@ -2,14 +2,12 @@ package ua.skillsup.examproject.isut.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.skillsup.examproject.isut.controller.dto.AccDto;
-import ua.skillsup.examproject.isut.controller.dto.ItemDto;
-import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
-import ua.skillsup.examproject.isut.controller.dto.TransDto;
+import ua.skillsup.examproject.isut.controller.dto.*;
 import ua.skillsup.examproject.isut.dao.*;
 import ua.skillsup.examproject.isut.dao.entity.*;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,9 +75,9 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public Iterable<OwnerDto> getActiveOwners() {
+    public Iterable<OwnerDto> getAllOwners(){
         List<OwnerDto> result = new ArrayList<>();
-        for (Owner owner: ownerRepository.getActiveOwners()) {
+        for (Owner owner: ownerRepository.findAll()) {
             result.add(new OwnerDto(owner));
         }
         return result;
@@ -87,11 +85,12 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public Iterable<OwnerDto> getAllOwners(){
+    public Iterable<OwnerDto> getActiveOwners() {
         List<OwnerDto> result = new ArrayList<>();
-        for (Owner owner: ownerRepository.findAll()) {
+        for (Owner owner:accountRepository.getAllActiveOwners()) {
             result.add(new OwnerDto(owner));
         }
+
         return result;
     }
 
@@ -176,11 +175,21 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public Iterable<OwnerDto> getAllActiveOwners() {
-        List<OwnerDto> result = new ArrayList<>();
-        for (Owner owner:accountRepository.getAllActiveOwners()) {
-            result.add(new OwnerDto(owner));
+    public Iterable<TransInfoDto> getStatisticForPeriod(short periodKind) {
+        LocalDate start;
+        List<TransInfoDto> result = new ArrayList<>();
+        switch (periodKind) {
+            case 0:
+                start = LocalDate.now().minusDays(1);
+                break;
+            case 1:
+                start = LocalDate.now().minusMonths(1);
+                break;
+            default:
+                return null;
         }
+        result.add(transRepository.getStatisticForPeriod(start, true));
+        result.add(transRepository.getStatisticForPeriod(start, false));
         return result;
     }
 }

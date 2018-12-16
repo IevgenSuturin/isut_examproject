@@ -19,9 +19,14 @@ public class OwnerController {
         this.service = service;
     }
 
-    @GetMapping(produces = {"application/json"})
-    public Iterable<OwnerDto> getActiveOwners(){
+    @GetMapping(produces = {"application/json"}, value = "All")
+    public Iterable<OwnerDto> getAllOwners(){
         return service.getAllOwners();
+    }
+
+    @GetMapping(produces = {"application/json"}, value = "Active")
+    public Iterable<OwnerDto> getActiveOwners(){
+        return service.getActiveOwners();
     }
 
     @PostMapping(consumes = {"application/json"})

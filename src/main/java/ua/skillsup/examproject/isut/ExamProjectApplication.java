@@ -32,9 +32,9 @@ public class ExamProjectApplication {
           service.createOwner(owner1);
           Owner owner2 = new Owner("Eric", "Smith", "Gaget International");
           service.createOwner(owner2);
-          Item item1 = new Item("TV Samsung", "Samsung");
+          Item item1 = new Item("TV Samsung", "Samsung", 20);
           service.createItem(new ItemDto(item1), owner1.getId());
-          Item item2 = new Item("TV LG", "LG");
+          Item item2 = new Item("TV LG", "LG", 15);
           service.createItem(new ItemDto(item2), owner2.getId());
          // service.createTransaction(item1.getId(), owner1.getId(), new Long(10));
          // service.createTransaction(item2.getId(), owner1.getId(), new Long(20));

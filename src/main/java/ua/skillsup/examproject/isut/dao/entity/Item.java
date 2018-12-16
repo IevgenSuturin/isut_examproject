@@ -15,11 +15,11 @@ public class Item {
 
     protected Item(){}
 
-    public Item(String title, String description) {
+    public Item(String title, String description, long price) {
         this.title = title;
         this.description = description;
         this.count = 0;
-        this.price = 0;
+        this.price = price;
         this.dateStore = LocalDateTime.now().plusYears(1);
     }
 

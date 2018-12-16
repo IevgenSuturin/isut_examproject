@@ -66,9 +66,5 @@ public class OwnerRepositoryImpl implements OwnerRepository {
         return Optional.empty();
     }
 
-    @Override
-    public List<Owner> getActiveOwners() {
-        return entityManager.createQuery("from Owner owner " +
-                "where  owner IN (select owner from Account acc where acc.count>0) ", Owner.class).getResultList();
-    }
+
 }

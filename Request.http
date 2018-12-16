@@ -4,27 +4,17 @@
 # * 'gtrp' and 'gtr' create a GET request with or without query parameters;
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
-### Get request with a header
-GET http://localhost:8080/items
-Accept: application/json
+#
 
-###
-
-GET http://localhost:8080/owners
-Accept: application/json
-
-###
-
-GET http://localhost:8080/transaction
+# OWNERS
+### Get owners
+GET http://localhost:8080/owners/All
 Accept: application/json
 ###
-
-GET http://localhost:8080/accounts
+GET http://localhost:8080/owners/Active
 Accept: application/json
-###
 
-
-### Send POST request with json body
+### Add new owner
 POST http://localhost:8080/owners
 Content-Type: application/json
 
@@ -33,46 +23,31 @@ Content-Type: application/json
   "last_name": "Super",
   "company_name": "IT company"
 }
-
-###
-
-### Send POST request with json body
-POST http://localhost:8080/owners
-Content-Type: application/json
-
-{
-  "first_name": "John",
-  "last_name": "Super",
-  "company_name": "IT company"
-}
-
-###
-
-### Send DELETE request with json body
-DELETE http://localhost:8080/items/itemid/3
-
-###
 
 ### Send DELETE request with json body
 DELETE http://localhost:8080/owners/2
-
 ###
 
 
-### Send POST request with json body
-POST http://localhost:8080/items/ownerid/2
+
+
+# ITEMS
+###
+GET http://localhost:8080/items
+Accept: application/json
+###
+POST http://localhost:8080/items/2
 Content-Type: application/json
 
 {
   "title": "test item333",
   "desc": "test item description2111111111111111111111",
-  "count": 30,
+  "count": 0,
   "price": 3000
 }
 
-
 ### Send POST request with json body
-POST http://localhost:8080/items/withdraw/ownerid/2
+POST http://localhost:8080/items/withdraw/2
 Content-Type: application/json
 
 [
@@ -82,14 +57,35 @@ Content-Type: application/json
 
 
 
+
+# TRANSACTIONS
+###
+GET http://localhost:8080/transaction
+Accept: application/json
+
 ### Send POST request with json body
 POST http://localhost:8080/transaction
 Content-Type: application/json
 
 {
-  "item": {"id": 2},
+  "item": {"id": 1},
   "owner": {"id": 2 },
-  "count": 12
+  "count": 10
 }
 
+###
+
+
+
+# ACCOUNTS
+###
+GET http://localhost:8080/accounts
+Accept: application/json
+###
+
+
+
+#STATISTIC
+GET http://localhost:8080/statistic/getTrAmountForPeriod/1
+Accept: application/json
 ###
