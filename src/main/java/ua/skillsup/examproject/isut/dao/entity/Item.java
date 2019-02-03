@@ -3,7 +3,6 @@ package ua.skillsup.examproject.isut.dao.entity;
 import ua.skillsup.examproject.isut.controller.dto.ItemDto;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +49,9 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true )
     private List<Transaction> transactions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true )
+    private List<Account> accounts = new ArrayList<>();
+
     public void addTransaction(Transaction transaction){
         transactions.add(transaction);
     }
@@ -83,6 +85,8 @@ public class Item {
                 ", dateStore=" + dateStore +
                 '}';
     }
+
+    public boolean isTransactionAvailable(Long count){ return (this.count+count)>=0;}
 
     public Long getId() {
         return id;
@@ -124,11 +128,19 @@ public class Item {
         this.price = price;
     }
 
-    public LocalDateTime getDate_stor() {
+    public LocalDateTime getDateStore() {
         return dateStore;
     }
 
-    public void setDate_stor(LocalDateTime dateStore) {
+    public void setDateStore(LocalDateTime dateStore) {
         this.dateStore = dateStore;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

@@ -52,6 +52,8 @@ public class Account {
                 '}';
     }
 
+    public boolean isTransactionAvailable(Long count){ return (this.count+count)>=0;}
+
     public Long getId() {
         return id;
     }

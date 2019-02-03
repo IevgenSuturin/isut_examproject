@@ -5,12 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.skillsup.examproject.isut.controller.dto.TransDto;
+import ua.skillsup.examproject.isut.controller.dto.TransInfoDto;
 import ua.skillsup.examproject.isut.dao.entity.Transaction;
+import ua.skillsup.examproject.isut.dao.support.PeriodType;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 import ua.skillsup.examproject.isut.service.ActionService;
 
 @RestController
-@RequestMapping("transaction")
+@RequestMapping("transactions")
 public class TransController {
     private final ActionService service;
 
@@ -22,6 +24,10 @@ public class TransController {
     @GetMapping(produces = {"application/json"})
     public Iterable<TransDto> getAllTrans() {return service.getAllTransactions();}
 
+    @GetMapping(produces = {"application/json"}, value = "amount-for-period/{typeOfPeriod}")
+    public Iterable<TransInfoDto> getTransAmountForPeriod(@PathVariable PeriodType typeOfPeriod){
+        return service.getStatisticForPeriod(typeOfPeriod);
+    }
 
     @PostMapping(consumes = {"application/json"})
     public ResponseEntity<String> addTransaction(@RequestBody Transaction trans) {

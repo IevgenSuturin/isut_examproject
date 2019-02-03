@@ -2,6 +2,7 @@ package ua.skillsup.examproject.isut.service;
 
 import ua.skillsup.examproject.isut.controller.dto.*;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
+import ua.skillsup.examproject.isut.dao.support.PeriodType;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 
 import java.util.List;
@@ -27,6 +28,6 @@ public interface ActionService {
     boolean deleteItem(final Long id);
     boolean deleteOwner(final Long id);
 
-    Iterable<TransInfoDto> getStatisticForPeriod(short periodKind);
+    Iterable<TransInfoDto> getStatisticForPeriod(PeriodType periodKind);
     Iterable<OwnerWithTotalPriceDto> getMostActiveOwners();
 }

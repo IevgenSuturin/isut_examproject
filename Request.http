@@ -8,11 +8,17 @@
 
 # OWNERS
 ### Get owners
-GET http://localhost:8080/owners/All
+GET http://localhost:8080/owners
 Accept: application/json
 ###
-GET http://localhost:8080/owners/Active
+GET http://localhost:8080/owners/active
 Accept: application/json
+###
+GET http://localhost:8080/owners/most-active
+Accept: application/json
+###
+
+
 
 ### Add new owner
 POST http://localhost:8080/owners
@@ -23,6 +29,15 @@ Content-Type: application/json
   "last_name": "Super0000000555555",
   "company_name": "IT company0000555"
 }
+
+### Send POST request with json body
+POST http://localhost:8080/owners/2/withdraw
+Content-Type: application/json
+
+[
+  { "id": 1, "count": 5 },
+  { "id": 2, "count": 4 }
+]
 
 ### Send DELETE request with json body
 DELETE http://localhost:8080/owners/2
@@ -46,25 +61,16 @@ Content-Type: application/json
   "price": 3000
 }
 
-### Send POST request with json body
-POST http://localhost:8080/items/withdraw/2
-Content-Type: application/json
-
-[
-  { "id": 1, "count": 5 },
-  { "id": 2, "count": 4 }
-]
-
 
 
 
 # TRANSACTIONS
 ###
-GET http://localhost:8080/transaction
+GET http://localhost:8080/transactions
 Accept: application/json
 
 ### Send POST request with json body
-POST http://localhost:8080/transaction
+POST http://localhost:8080/transactions
 Content-Type: application/json
 
 {
@@ -72,7 +78,9 @@ Content-Type: application/json
   "owner": {"id": 1 },
   "count": 10
 }
-
+###
+GET http://localhost:8080/transactions/amount-for-period/1
+Accept: application/json
 ###
 
 
@@ -82,14 +90,3 @@ Content-Type: application/json
 GET http://localhost:8080/accounts
 Accept: application/json
 ###
-
-
-
-#STATISTIC
-GET http://localhost:8080/statistic/getTrAmountForPeriod/1
-Accept: application/json
-###
-GET http://localhost:8080/statistic/getMostActiveOwners
-Accept: application/json
-###
-

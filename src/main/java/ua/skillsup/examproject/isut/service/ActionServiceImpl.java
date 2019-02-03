@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.examproject.isut.controller.dto.*;
 import ua.skillsup.examproject.isut.dao.*;
 import ua.skillsup.examproject.isut.dao.entity.*;
+import ua.skillsup.examproject.isut.dao.support.PeriodType;
 import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 
 import java.time.LocalDate;
@@ -146,12 +147,12 @@ public class ActionServiceImpl implements ActionService {
             }
         }
 
-        if(account.getCount()+count<0){
-              throw new NotEnoughDataToProcessTransaction("The amount of account for credit transaction les than transaction amount!");
+        if(!account.isTransactionAvailable(count)){
+              throw new NotEnoughDataToProcessTransaction("The amount of account for credit transaction less than transaction amount!");
         }
 
-        if(item.getCount()+count<0){
-             throw new NotEnoughDataToProcessTransaction("The amount of item for credit transaction les than transaction amount!");
+        if(!item.isTransactionAvailable(count)){
+             throw new NotEnoughDataToProcessTransaction("The amount of item for credit transaction less than transaction amount!");
         }
 
         account.setCount(account.getCount()+count);
@@ -175,15 +176,21 @@ public class ActionServiceImpl implements ActionService {
 
     @Transactional
     @Override
-    public Iterable<TransInfoDto> getStatisticForPeriod(short periodKind) {
+    public Iterable<TransInfoDto> getStatisticForPeriod(PeriodType periodKind) {
         LocalDate start;
         List<TransInfoDto> result = new ArrayList<>();
         switch (periodKind) {
-            case 0:
+            case DAY:
                 start = LocalDate.now().minusDays(1);
                 break;
-            case 1:
+            case WEEK:
+                start = LocalDate.now().minusWeeks(1);
+                break;
+            case MONTH:
                 start = LocalDate.now().minusMonths(1);
+                break;
+            case YEAR:
+                start = LocalDate.now().minusYears(1);
                 break;
             default:
                 return null;

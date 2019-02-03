@@ -8,7 +8,6 @@ import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
