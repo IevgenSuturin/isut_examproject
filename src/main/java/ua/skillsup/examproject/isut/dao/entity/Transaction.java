@@ -13,7 +13,7 @@ public class Transaction {
         this.item = item;
         this.owner = owner;
         this.count = count;
-        this.date_stor = LocalDateTime.now();
+        this.dateStore = LocalDateTime.now();
     }
 
     @Id
@@ -34,7 +34,7 @@ public class Transaction {
     private long count;
 
     @Column(name = "data_trans")
-    private LocalDateTime date_stor;
+    private LocalDateTime dateStore;
 
     @Override
     public boolean equals(Object o) {
@@ -91,8 +91,8 @@ public class Transaction {
         this.owner = owner;
     }
 
-    public LocalDateTime getDate_stor() { return date_stor;  }
+    public LocalDateTime getDateStore() { return dateStore;  }
 
-    public void setDate_stor(LocalDateTime date_stor) { this.date_stor = date_stor; }
+    public void setDateStore(LocalDateTime date_stor) { this.dateStore = date_stor; }
 }
 

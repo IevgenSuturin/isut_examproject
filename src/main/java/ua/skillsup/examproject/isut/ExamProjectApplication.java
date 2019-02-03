@@ -7,35 +7,34 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import ua.skillsup.examproject.isut.controller.dto.ItemDto;
-import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
-import ua.skillsup.examproject.isut.dao.entity.Transaction;
-import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
-import ua.skillsup.examproject.isut.service.ActionService;
+import ua.skillsup.examproject.isut.service.ChangeDataService;
+import ua.skillsup.examproject.isut.service.GetInformationService;
 
 @ImportResource("classpath:/spring/db-context.xml")
 @SpringBootApplication
 public class ExamProjectApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext= SpringApplication.run(ExamProjectApplication.class, args);
-        ActionService service = applicationContext.getBean(ActionService.class);
+        GetInformationService infoService = applicationContext.getBean(GetInformationService.class);
+        ChangeDataService dataService = applicationContext.getBean(ChangeDataService.class);
 
-        System.out.println(service.getAllItems());
-        System.out.println(service.getAllOwners());
+        System.out.println(infoService.getAllItems());
+        System.out.println(infoService.getAllOwners());
     }
 
     @Bean
-    public CommandLineRunner initItemData (ActionService service){
+    public CommandLineRunner initItemData (ChangeDataService dataService){
         return args -> {
           Owner owner1 = new Owner("John", "Smith", "Gaget International");
-          service.createOwner(owner1);
+            dataService.createOwner(owner1);
           Owner owner2 = new Owner("Eric", "Smith", "Gaget International");
-          service.createOwner(owner2);
+            dataService.createOwner(owner2);
           Item item1 = new Item("TV Samsung", "Samsung", 20);
-          service.createItem(new ItemDto(item1), owner1.getId());
+            dataService.createItem(new ItemDto(item1), owner1.getId());
           Item item2 = new Item("TV LG", "LG", 15);
-          service.createItem(new ItemDto(item2), owner2.getId());
+            dataService.createItem(new ItemDto(item2), owner2.getId());
          // service.createTransaction(item1.getId(), owner1.getId(), new Long(10));
          // service.createTransaction(item2.getId(), owner1.getId(), new Long(20));
         };

@@ -11,7 +11,7 @@ public class TransDto {
         this.itemDto = new ItemDto(transaction.getItem());
         this.ownerDto = new OwnerDto(transaction.getOwner());
         this.count = transaction.getCount();
-        this.localDate = transaction.getDate_stor();
+        this.localDate = transaction.getDateStore();
     }
 
     private Long id;

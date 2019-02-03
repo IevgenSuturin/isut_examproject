@@ -8,10 +8,12 @@ import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.TransRepository;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 import ua.skillsup.examproject.isut.dao.entity.Transaction;
+import ua.skillsup.examproject.isut.dao.support.TransTypes;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,7 @@ public class TransRepositoryImpl implements TransRepository {
     @Override
     public Long create(Transaction transaction) {
         if(transaction.getId() == null) {
-            transaction.setDate_stor(LocalDateTime.now());
+            transaction.setDateStore(LocalDateTime.now());
             entityManager.persist(transaction);
         }
         return transaction.getId();
@@ -60,26 +62,29 @@ public class TransRepositoryImpl implements TransRepository {
     }
 
     @Override
-    public TransInfoDto getStatisticForPeriod(LocalDate dateStart, boolean stored) {
-        Object[] resQuery;
+    public TransInfoDto getStatisticForPeriod(LocalDate dateStart, TransTypes transType) {
+        Object[] resQuery = new Object[]{};
         TransInfoDto result = new TransInfoDto(0, 0, "Unknown transaction");
         String desc;
-        if(stored) {
-            resQuery = (Object[]) entityManager.createQuery("select sum(t.count * i.price), sum(t.count) " +
-                    " from Transaction t join t.item i " +
-                    " where (t.date_stor between :dateStart and :dateStop) and t.count > 0")
-                    .setParameter("dateStart", dateStart.atStartOfDay())
-                    .setParameter("dateStop", LocalDateTime.now())
-                    .getSingleResult();
-            result.setDescription("Stored transactions");
-        }else{
-            resQuery = (Object[]) entityManager.createQuery("select sum(t.count * i.price), sum(t.count) " +
-                    " from Transaction t join t.item i " +
-                    " where (t.date_stor between :dateStart and :dateStop) and t.count < 0")
-                    .setParameter("dateStart", dateStart.atStartOfDay())
-                    .setParameter("dateStop", LocalDateTime.now())
-                    .getSingleResult();
-            result.setDescription("Withdrawed transactions");
+        switch (transType)
+        {
+            case STOREDTRANSACTIONS:
+                resQuery = (Object[]) entityManager.createQuery("select sum(t.count * i.price), sum(t.count) " +
+                        " from Transaction t join t.item i " +
+                        " where (t.dateStore between :dateStart and :dateStop) and t.count > 0")
+                        .setParameter("dateStart", dateStart.atStartOfDay())
+                        .setParameter("dateStop", LocalDateTime.now())
+                        .getSingleResult();
+                result.setDescription("Stored transactions");
+                break;
+            case WITHDRAWEDTRANSACTIONS:
+                resQuery = (Object[]) entityManager.createQuery("select sum(t.count * i.price), sum(t.count) " +
+                        " from Transaction t join t.item i " +
+                        " where (t.dateStore between :dateStart and :dateStop) and t.count < 0")
+                        .setParameter("dateStart", dateStart.atStartOfDay())
+                        .setParameter("dateStop", LocalDateTime.now())
+                        .getSingleResult();
+                result.setDescription("Withdrawed transactions");
         }
 
         if(resQuery[0] != null )

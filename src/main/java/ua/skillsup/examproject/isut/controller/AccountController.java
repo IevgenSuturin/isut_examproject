@@ -6,16 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.skillsup.examproject.isut.controller.dto.AccDto;
-import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
-import ua.skillsup.examproject.isut.service.ActionService;
+import ua.skillsup.examproject.isut.service.GetInformationService;
 
 @Controller
 @RequestMapping("accounts")
 public class AccountController {
-    private final ActionService service;
+    private final GetInformationService service;
 
     @Autowired
-    public AccountController(ActionService service) {
+    public AccountController(GetInformationService service) {
         this.service = service;
     }
 
