@@ -3,6 +3,7 @@ package ua.skillsup.examproject.isut.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.examproject.isut.controller.dto.ItemDto;
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.AccountRepository;
 import ua.skillsup.examproject.isut.dao.ItemRepository;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
@@ -32,7 +33,7 @@ public class ChangeDataServiceImpl implements ChangeDataService {
 
     @Transactional
     @Override
-    public long createItem(ItemDto itemDto, Long ownerId) throws NotEnoughDataToProcessTransaction {
+    public Long createItem(ItemDto itemDto, Long ownerId) throws NotEnoughDataToProcessTransaction {
         Item item = new Item(itemDto);
         long itemId = itemRepository.create(item);
         long count = item.getCount();
@@ -43,7 +44,7 @@ public class ChangeDataServiceImpl implements ChangeDataService {
 
     @Transactional
     @Override
-    public boolean withdrawItems(List<ItemDto> itemDtoList, Long ownerId) throws NotEnoughDataToProcessTransaction
+    public Boolean withdrawItems(List<ItemDto> itemDtoList, Long ownerId) throws NotEnoughDataToProcessTransaction
     {
         boolean result = false;
         for (ItemDto itemDto:itemDtoList) {
@@ -59,7 +60,7 @@ public class ChangeDataServiceImpl implements ChangeDataService {
 
     @Transactional
     @Override
-    public boolean deleteItem(Long id) {
+    public Boolean deleteItem(Long id) {
         Item item = itemRepository.getOne(id);
         if(item !=null ) {
             return itemRepository.delete(item);
@@ -69,13 +70,13 @@ public class ChangeDataServiceImpl implements ChangeDataService {
 
     @Transactional
     @Override
-    public long createOwner(Owner owner) {
+    public Long createOwner(Owner owner) {
         return ownerRepository.create(owner);
     }
 
     @Transactional
     @Override
-    public boolean deleteOwner(Long id) {
+    public Boolean deleteOwner(Long id) {
         Owner owner = ownerRepository.getOne(id);
         if(owner != null && !accountRepository.isActiveOwnerAccountExists(owner))
         {
@@ -88,7 +89,7 @@ public class ChangeDataServiceImpl implements ChangeDataService {
 
     @Transactional
     @Override
-    public long createTransaction(Long itemId, Long ownerId, Long count) throws NotEnoughDataToProcessTransaction {
+    public Long createTransaction(Long itemId, Long ownerId, Long count) throws NotEnoughDataToProcessTransaction {
         Owner owner = ownerRepository.getOne(ownerId);
         if ( owner == null ){
             throw new NotEnoughDataToProcessTransaction("Owner not found!");

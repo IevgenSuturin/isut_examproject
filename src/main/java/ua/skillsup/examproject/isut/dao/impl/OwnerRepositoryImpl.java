@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 
@@ -42,8 +43,7 @@ public class OwnerRepositoryImpl implements OwnerRepository {
     }
 
     @Override
-    public boolean exist(Long aLong) {
-        return getOne(aLong) != null;
+    public boolean exist(Long aLong) { return getOne(aLong) != null;
     }
 
     @Override
