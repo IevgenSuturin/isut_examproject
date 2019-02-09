@@ -24,7 +24,7 @@ public class ExamProjectApplication {
         System.out.println(infoService.getAllOwners());
     }
 
-    @Bean
+   /* @Bean
     public CommandLineRunner initItemData (ChangeDataService dataService){
         return args -> {
           Owner owner1 = new Owner("John", "Smith", "Gaget International");
@@ -38,6 +38,6 @@ public class ExamProjectApplication {
          // service.createTransaction(item1.getId(), owner1.getId(), new Long(10));
          // service.createTransaction(item2.getId(), owner1.getId(), new Long(20));
         };
-    }
+    }*/
 
 }
