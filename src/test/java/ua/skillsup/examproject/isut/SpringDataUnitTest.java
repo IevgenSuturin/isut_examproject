@@ -86,7 +86,7 @@ public class SpringDataUnitTest {
     @Autowired
     private EntityManager entityManager;
 
-    @MockBean
+    @Autowired
     private ItemRepository itemRepository;
 
     @Test
@@ -100,7 +100,7 @@ public class SpringDataUnitTest {
         Item found = itemRepository.getOne(item1.getId());
 
         //than
-        System.out.println(item1.toString());
-      //  System.out.println(found.toString());
+        assertThat(item1).isEqualToComparingFieldByField(found);
+
     }
 }
