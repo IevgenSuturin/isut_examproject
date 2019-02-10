@@ -37,6 +37,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Sql(scripts = "classpath:db/schema.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "classpath:db/drop_schema.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class SpringServiceUnitTest {
 
     @TestConfiguration
@@ -95,5 +96,18 @@ public class SpringServiceUnitTest {
 
         //than
         assertThat(found.get().getTitle()).isEqualTo(item1.getTitle());
+    }
+
+    @Test
+    public void whenCreateOwner_thenReadIt(){
+        //given
+        Owner owner1 = new Owner("John", "Smith", "Gaget International");
+        changeDataService.createOwner(owner1);
+
+        //when
+        Optional<OwnerDto> found = informationService.findOwnerByByFirstName(owner1.getFirst_name());
+
+        //than
+        assertThat(found.get().getFname()).isEqualTo(owner1.getFirst_name());
     }
 }
