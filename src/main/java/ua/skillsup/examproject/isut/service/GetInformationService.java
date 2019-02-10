@@ -12,7 +12,8 @@ public interface GetInformationService {
     Iterable<TransDto> getAllTransactions();
     Iterable<AccDto> getAllAccounts();
 
-    Optional<ItemDto> findByTitle(String title);
+    Optional<ItemDto> findItemByTitle(String title);
+    Optional<OwnerDto> findOwnerByByFirstName(String firstName);
 
     Iterable<TransInfoDto> getStatisticForPeriod(PeriodType periodKind);
     Iterable<OwnerWithTotalPriceDto> getMostActiveOwners();

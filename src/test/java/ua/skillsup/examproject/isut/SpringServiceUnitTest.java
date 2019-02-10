@@ -12,15 +12,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import ua.skillsup.examproject.isut.controller.dto.ItemDto;
+import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.AccountRepository;
 import ua.skillsup.examproject.isut.dao.ItemRepository;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
 import ua.skillsup.examproject.isut.dao.TransRepository;
 import ua.skillsup.examproject.isut.dao.entity.Item;
+import ua.skillsup.examproject.isut.dao.entity.Owner;
 import ua.skillsup.examproject.isut.dao.impl.AccountRepsitoryImpl;
 import ua.skillsup.examproject.isut.dao.impl.ItemRepositoryImpl;
 import ua.skillsup.examproject.isut.dao.impl.OwnerRepositoryImpl;
 import ua.skillsup.examproject.isut.dao.impl.TransRepositoryImpl;
+import ua.skillsup.examproject.isut.exceptions.NotEnoughDataToProcessTransaction;
 import ua.skillsup.examproject.isut.service.ChangeDataService;
 import ua.skillsup.examproject.isut.service.ChangeDataServiceImpl;
 import ua.skillsup.examproject.isut.service.GetInformationService;
@@ -35,6 +38,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @DataJpaTest
 @Sql(scripts = "classpath:db/schema.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class SpringServiceUnitTest {
+
     @TestConfiguration
     static class SpringDataUnitTestContextConfiguration{
 
@@ -73,30 +77,23 @@ public class SpringServiceUnitTest {
 
     }
 
-    @Before
-    public void setUpMockedItemRepository(){
-        Item item = new Item("Phone Samsung", "Samsung", 20);
-
-        Mockito.when(mockedItemRepository.findByTitle("Phone Samsung")).thenReturn(Optional.of(new ItemDto(item)));
-    }
-
     @Autowired
     private ChangeDataService changeDataService;
 
     @Autowired
-    private GetInformationService getInformationService;
-
-    @MockBean
-    private ItemRepository mockedItemRepository;
+    private GetInformationService informationService;
 
     @Test
-    public void whenValidName_thenItemShouldBeFound(){
+    public void whenValidName_thenItemShouldBeFound() throws NotEnoughDataToProcessTransaction {
         //given
-        String title = "Phone Samsung";
-        Optional<ItemDto> found = getInformationService.findByTitle(title);
+        Owner owner1 = new Owner("John", "Smith", "Gaget International");
+        Item item1 = new Item("TV Samsung", "Samsung", 20);
+        changeDataService.createOwner(owner1);
+        changeDataService.createItem(new ItemDto(item1), owner1.getId());
+
+        Optional<ItemDto> found = informationService.findItemByTitle(item1.getTitle());
 
         //than
-        assertThat(found.get().getTitle()).isEqualTo(title);
+        assertThat(found.get().getTitle()).isEqualTo(item1.getTitle());
     }
-
 }

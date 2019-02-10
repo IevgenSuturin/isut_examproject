@@ -4,11 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ua.skillsup.examproject.isut.controller.dto.ItemDto;
 import ua.skillsup.examproject.isut.controller.dto.OwnerDto;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
+import ua.skillsup.examproject.isut.dao.entity.Item;
 import ua.skillsup.examproject.isut.dao.entity.Owner;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.Optional;
 
 @Repository
@@ -61,8 +64,16 @@ public class OwnerRepositoryImpl implements OwnerRepository {
     }
 
     @Override
-    public Optional<Owner> findByFirstName(String fname) {
-        return Optional.empty();
+    public Optional<OwnerDto> findByFirstName(String firstName) {
+        try{
+            return Optional.of(new OwnerDto(entityManager
+                    .createQuery("from Owner where first_name=:param", Owner.class)
+                    .setParameter("param", firstName)
+                    .getSingleResult()));
+        } catch (NoResultException ex){
+            return Optional.empty();
+        }
+
     }
 
 

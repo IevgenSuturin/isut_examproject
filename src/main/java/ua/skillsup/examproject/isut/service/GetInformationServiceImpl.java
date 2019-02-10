@@ -31,7 +31,13 @@ public class GetInformationServiceImpl implements GetInformationService {
 
     @Transactional
     @Override
-    public Optional<ItemDto> findByTitle(String title){
+    public Optional<OwnerDto> findOwnerByByFirstName(String firstName){
+        return ownerRepository.findByFirstName(firstName);
+    }
+
+    @Transactional
+    @Override
+    public Optional<ItemDto> findItemByTitle(String title){
         return itemRepository.findByTitle(title);
     }
 
