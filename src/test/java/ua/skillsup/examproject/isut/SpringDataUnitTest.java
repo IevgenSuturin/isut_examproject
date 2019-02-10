@@ -32,6 +32,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Sql(scripts = "classpath:db/schema.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "classpath:db/drop_schema.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class SpringDataUnitTest {
 
     @TestConfiguration
