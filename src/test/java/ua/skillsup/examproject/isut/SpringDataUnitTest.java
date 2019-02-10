@@ -90,7 +90,7 @@ public class SpringDataUnitTest {
     private ItemRepository itemRepository;
 
     @Test
-    public void whenFindByName_thenReturnItem(){
+    public void whenFind_thenReturnItem(){
         //given
         Item item1 = new Item("TV Samsung", "Samsung", 20);
         entityManager.persist(item1);
