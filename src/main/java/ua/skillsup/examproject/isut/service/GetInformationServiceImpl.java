@@ -11,6 +11,7 @@ import ua.skillsup.examproject.isut.dao.support.TransTypes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GetInformationServiceImpl implements GetInformationService {
@@ -26,6 +27,12 @@ public class GetInformationServiceImpl implements GetInformationService {
         this.transRepository = transRepository;
         this.accountRepository = accountRepository;
 
+    }
+
+    @Transactional
+    @Override
+    public Optional<ItemDto> findByTitle(String title){
+        return itemRepository.findByTitle(title);
     }
 
     @Transactional

@@ -1,13 +1,17 @@
 package ua.skillsup.examproject.isut;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+import ua.skillsup.examproject.isut.controller.dto.ItemDto;
 import ua.skillsup.examproject.isut.dao.AccountRepository;
 import ua.skillsup.examproject.isut.dao.ItemRepository;
 import ua.skillsup.examproject.isut.dao.OwnerRepository;
@@ -22,9 +26,7 @@ import ua.skillsup.examproject.isut.service.ChangeDataServiceImpl;
 import ua.skillsup.examproject.isut.service.GetInformationService;
 import ua.skillsup.examproject.isut.service.GetInformationServiceImpl;
 
-
 import javax.persistence.EntityManager;
-
 import java.util.Optional;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -32,8 +34,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Sql(scripts = "classpath:db/schema.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-public class SpringDataUnitTest {
-
+public class SpringServiceUnitTest {
     @TestConfiguration
     static class SpringDataUnitTestContextConfiguration{
 
@@ -46,7 +47,7 @@ public class SpringDataUnitTest {
         }
 
         @Bean
-        public  TransRepository transRepository(){
+        public TransRepository transRepository(){
             return new TransRepositoryImpl(entityManager);
         }
 
@@ -72,29 +73,30 @@ public class SpringDataUnitTest {
 
     }
 
+    @Before
+    public void setUpMockedItemRepository(){
+        Item item = new Item("Phone Samsung", "Samsung", 20);
+
+        Mockito.when(mockedItemRepository.findByTitle("Phone Samsung")).thenReturn(Optional.of(new ItemDto(item)));
+    }
+
     @Autowired
     private ChangeDataService changeDataService;
 
     @Autowired
     private GetInformationService getInformationService;
 
-    @Autowired
-    private EntityManager entityManager;
-
-    @Autowired
-    private ItemRepository itemRepository;
+    @MockBean
+    private ItemRepository mockedItemRepository;
 
     @Test
-    public void whenFind_thenReturnItem(){
+    public void whenValidName_thenItemShouldBeFound(){
         //given
-        Item item1 = new Item("TV Samsung", "Samsung", 20);
-        entityManager.persist(item1);
-
-        //when
-        Item found = itemRepository.getOne(item1.getId());
+        String title = "Phone Samsung";
+        Optional<ItemDto> found = getInformationService.findByTitle(title);
 
         //than
-        assertThat(item1).isEqualToComparingFieldByField(found);
-
+        assertThat(found.get().getTitle()).isEqualTo(title);
     }
+
 }

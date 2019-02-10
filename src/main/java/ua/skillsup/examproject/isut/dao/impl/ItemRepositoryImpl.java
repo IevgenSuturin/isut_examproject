@@ -4,10 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ua.skillsup.examproject.isut.controller.dto.ItemDto;
 import ua.skillsup.examproject.isut.dao.ItemRepository;
 import ua.skillsup.examproject.isut.dao.entity.Item;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.Optional;
 
 @Repository
@@ -57,7 +59,14 @@ public class ItemRepositoryImpl implements ItemRepository {
     }
 
     @Override
-    public Optional<Item> findByTitle(String title) {
-        return Optional.empty();
+    public Optional<ItemDto> findByTitle(String title) {
+        try{
+        return Optional.of(new ItemDto(entityManager
+                            .createQuery("from Item where title=:param", Item.class)
+                            .setParameter("param", title)
+                            .getSingleResult()));
+        } catch (NoResultException ex){
+            return Optional.empty();
+        }
     }
 }
